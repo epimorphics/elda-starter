@@ -8,9 +8,13 @@
     <rule>
         <from>(^/lda-assets/(.*))</from>
         <to last="true" type="forward">$1</to>
-        
     </rule>
 
+    <rule>
+        <from>(^/$)</from>
+        <to last="true" type="forward">/</to>
+    </rule>
+    
     <rule>
         <from>^/(.*)</from>
         <to last="true" type="forward">/shell/$1</to>
