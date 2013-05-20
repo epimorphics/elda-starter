@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?> 
+    <!DOCTYPE urlrewrite
+        PUBLIC "-//tuckey.org//DTD UrlRewrite 3.2//EN"
+        "http://www.tuckey.org/res/dtds/urlrewrite3.2.dtd">
+
+<urlrewrite use-query-string="true">
+
+    <rule>
+        <from>(^/lda-assets/(.*))</from>
+        <to last="true" type="forward">$1</to>
+        
+    </rule>
+
+    <rule>
+        <from>^/(.*)</from>
+        <to last="true" type="forward">/shell/$1</to>
+    </rule>
+	
+	<rule>
+	    <from>^/shell/(.*)$</from>
+	    <set type="status">404</set>
+        <to type="pre-include" last="true">Resource $0 Not Found</to>   
+	</rule>
+
+</urlrewrite>

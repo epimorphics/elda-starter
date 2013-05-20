@@ -1,0 +1,10 @@
+prefix api:              <http://purl.org/linked-data/api/vocab#>
+
+select ?shortname ?uri ?range where {
+
+?uri api:label ?shortname .
+
+OPTIONAL { ?uri <http://www.w3.org/2000/01/rdf-schema#domain> ?domain }
+OPTIONAL { ?uri <http://www.w3.org/2000/01/rdf-schema#range> ?range }
+
+} ORDER BY ?shortname
