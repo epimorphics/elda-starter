@@ -94,8 +94,8 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.epimorphics.lda</groupId>
-			<artifactId>lda</artifactId>
-			<version>1.2.22</version>
+			<artifactId>elda-lda</artifactId>
+			<version>1.2.23-SNAPSHOT</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>saxon-dom</artifactId>
@@ -124,7 +124,7 @@
 		<dependency>
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-servlet</artifactId>
-			<version>1.13</version>
+			<version>1.16</version>
 		</dependency>
 	</dependencies>
 

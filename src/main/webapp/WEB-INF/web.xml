@@ -1,54 +1,59 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app PUBLIC 
+    '-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN'
+    'http://java.sun.com/dtd/web-app_2_3.dtd'>
+<web-app> 
 
-<web-app>
+    <!--
+    <filter>
+        <filter-name>UrlRewriteFilter</filter-name>
+        <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
+   
+        <init-param>
+            <param-name>logLevel</param-name>
+            <param-value>DEBUG</param-value>
+        </init-param>
+        
+    </filter>
+    
+    <filter-mapping>
+        <filter-name>UrlRewriteFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    -->
+    
+  <servlet>
+    <servlet-name>jersey-for-elda</servlet-name>
+    <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+       
+    <init-param>
+        <param-name>com.sun.jersey.config.property.packages</param-name>
+        <param-value>com.epimorphics.lda.restlets</param-value>
+    </init-param>
+    
+    <init-param>
+        <param-name>com.epimorphics.api.initialSpecFile</param-name>
+        <param-value>
+            /etc/elda/conf.d/{APP}/*.ttl
+        </param-value>
+    </init-param>
+  </servlet>
+  
+  <!-- ==================================================================== -->
 
-	<display-name>BWQ LDA Shell</display-name>
+  <servlet-mapping>
+     <servlet-name>jersey-for-elda</servlet-name>
+     <url-pattern>/*</url-pattern> 
+  </servlet-mapping>  
 
-	<!-- Enable URL rewriting/redirecting -->
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>/lda-assets/*</url-pattern>
+  </servlet-mapping>
+  
+  <!-- ==================================================================== -->
 
-	<filter>
-		<filter-name>UrlRewriteFilter</filter-name>
-		<filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
-	</filter>
-
-	<filter-mapping>
-		<filter-name>UrlRewriteFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-
-	<servlet>
-		<servlet-name>shell</servlet-name>
-
-		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
-		<init-param>
-			<param-name>com.sun.jersey.config.property.packages</param-name>
-			<param-value>com.epimorphics.lda.restlets,com.epimorphics.lda.routing,com.epimorphics.ldaShell.servlets</param-value>
-		</init-param>
-	</servlet>
-
-	<servlet>
-		<servlet-name>api-loader</servlet-name>
-		<servlet-class>com.epimorphics.lda.routing.Loader</servlet-class>
-		<init-param>
-			<param-name>com.epimorphics.api.initialSpecFile</param-name>
-			<param-value>local:WEB-INF/config/config.ttl</param-value>
-		</init-param>
-		<init-param>
-			<param-name>log4j-init-file</param-name>
-			<param-value>log4j.properties</param-value>
-		</init-param>
-		<load-on-startup>10</load-on-startup>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>shell</servlet-name>
-		<url-pattern>/shell/*</url-pattern>
-	</servlet-mapping>
-
-	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
-	</welcome-file-list>
-
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
 </web-app>
