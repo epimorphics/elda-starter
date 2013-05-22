@@ -6,24 +6,8 @@
 <urlrewrite use-query-string="true">
 
     <rule>
-        <from>(^/lda-assets/(.*))</from>
-        <to last="true" type="forward">$1</to>
-    </rule>
-
-    <rule>
         <from>(^/$)</from>
-        <to last="true" type="forward">/</to>
+        <to last="true" type="forward">/index.html</to>
     </rule>
     
-    <rule>
-        <from>^/(.*)</from>
-        <to last="true" type="forward">/shell/$1</to>
-    </rule>
-	
-	<rule>
-	    <from>^/shell/(.*)$</from>
-	    <set type="status">404</set>
-        <to type="pre-include" last="true">Resource $0 Not Found</to>   
-	</rule>
-
 </urlrewrite>
