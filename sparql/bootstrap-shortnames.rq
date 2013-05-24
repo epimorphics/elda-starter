@@ -1,0 +1,66 @@
+PREFIX api:               <http://purl.org/linked-data/api/vocab#>
+PREFIX dc:                <http://purl.org/dc/elements/1.1/>
+PREFIX dct:               <http://purl.org/dc/terms/>
+PREFIX foaf:              <http://xmlns.com/foaf/0.1/>
+PREFIX rdfs:              <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl:               <http://www.w3.org/2002/07/owl#>
+PREFIX qudt:              <http://qudt.org/schema/qudt#>
+PREFIX qb:                <http://purl.org/linked-data/cube#>
+PREFIX rdf:               <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:              <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos:              <http://www.w3.org/2004/02/skos/core#>
+PREFIX time:              <http://www.w3.org/2006/time#>
+PREFIX void:              <http://rdfs.org/ns/void#>
+PREFIX xsd:               <http://www.w3.org/2001/XMLSchema#>
+
+CONSTRUCT {
+  ?p rdfs:range ?dt,?range;
+     api:multiValued ?multiValued ;
+     api:structured  ?structured ;    
+     api:label ?ln .
+
+
+  ?dt    a rdfs:Datatype ;
+         api:label ?dtLn .
+         
+  ?class a rdfs:Class ;
+         api:label ?classLn .
+}
+WHERE
+{ 
+  {
+    ## Sample a value for every property
+    ## WARNING - if range type is polymorphic, 
+    ## only one type/datatype will be extracted.
+    { SELECT ?p (sample(?val) as ?v) 
+      WHERE {
+        ?s ?p ?val .
+      } GROUP BY ?p
+    } OPTIONAL { 
+      ## Check if there are any multivalued instances of the property
+      FILTER EXISTS { [] ?p ?v1,?v2 . FILTER (?v1 != ?v2) }
+      BIND (true as ?multiValued)
+    }
+ 
+    ## For non-literals set a generic rdfs:Resource as property range.
+    BIND (IF(!isLiteral(?v), rdfs:Resource, ?undef) as ?range)
+    
+    ## Declare non-numeric literals as api:structured.    
+    BIND (IF( isLiteral(?v) && !isNumeric(?v) , true, ?undef) as ?structured)
+        
+    ## Get non xsd:string, rdf:langString datatypes
+    BIND( IF( (datatype(?v)!=xsd:string && datatype(?v)!=rdf:langString), datatype(?v), ?undef ) as ?dt )
+    
+    ## Extract last path segment of a shortname as datatype and property.
+    BIND( replace(STR(?dt),".*(/|#)([^/#]*$)","$2") as ?dtLn)
+    BIND( replace(STR(?p),".*(/|#)([^/#]*$)","$2") as ?ln)
+  } 
+  UNION
+  { { SELECT DISTINCT ?class  WHERE {
+        [] a ?class .
+        FILTER (!isBlank(?class))
+      }
+    }
+    BIND( replace(STR(?class),".*(/|#)([^/#]*$)","$2") as ?classLn)
+  }
+}

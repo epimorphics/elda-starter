@@ -113,6 +113,7 @@ spec:HtmlFormatter
             api:mimeType            "text/html;charset=UTF-8";
             elda:metadataOptions    "bindings,versions,execution,formats";
             api:stylesheet          "lda-assets/xslt/staging.xsl";
+#            api:stylesheet          "lda-assets/xslt/result-osm-trimmed.xsl";
             .
 
 ###############################################################################

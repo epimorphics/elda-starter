@@ -1,0 +1,22 @@
+SELECT ?t1 ?t2 ?ln1 WHERE 
+{ 
+  # Pick over properties and item types.
+  { SELECT DISTINCT ?t1 
+    WHERE { {  [] ?t1 [] } UNION  { [] a ?t1 . FILTER (!isBlank(?t1)) } }
+  }
+     
+  # and again.
+  { SELECT DISTINCT ?t2 
+    WHERE { {  [] ?t2 [] } UNION  { [] a ?t2 . FILTER (!isBlank(?t2)) } }
+  }
+     
+  # Make sure they are different (< halves number of comparisons O(n^2))
+  FILTER(STR(?t1) < STR(?t2))
+  
+  # extract trailing local names
+  BIND( replace(STR(?t1),".*(/|#)([^/#]*$)","$2") as ?ln1)
+  BIND( replace(STR(?t2),".*(/|#)([^/#]*$)","$2") as ?ln2)
+
+  # Report only duplicates.
+  FILTER (?ln1 = ?ln2)
+}
