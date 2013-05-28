@@ -88,11 +88,6 @@ rdf:type    a               rdf:Property;
             rdfs:range      rdfs:Resource;
             api:label       "type";
             .
-
-skos:prefLabel  a           rdf:Property;
-            api:label       "name";
-            api:structured  "true"^^xsd:boolean;
-            .
             
 geo:lat     rdfs:range      xsd:decimal;
             api:name        "lat";

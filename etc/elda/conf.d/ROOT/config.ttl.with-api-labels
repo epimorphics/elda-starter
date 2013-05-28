@@ -1,0 +1,1373 @@
+## Common prefixes.
+@prefix dc:      <http://purl.org/dc/elements/1.1/> .
+@prefix dct:     <http://purl.org/dc/terms/> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix api:     <http://purl.org/linked-data/api/vocab#> .
+@prefix elda:    <http://www.epimorphics.com/vocabularies/lda#> .
+@prefix foaf:    <http://xmlns.com/foaf/0.1/> .
+@prefix geo:     <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+
+@prefix spec:                <http://example.org/demo/api#> .
+
+<http://environment.data.gov.uk/sparql/bwq/query> elda:supportsNestedSelect true . 
+<http://localhost:3030/store/query> elda:supportsNestedSelect true .  
+
+###############################################################################
+#
+# Root API description
+#
+###############################################################################             
+spec:api   a       api:API;
+        api:lang "en";
+        api:base "/";
+        rdfs:comment        "A demo API configuration"@en;
+        rdfs:label          "A demo API configuration"@en;      
+        api:sparqlEndpoint  <http://environment.data.gov.uk/sparql/bwq/query>;
+#        api:sparqlEndpoint  <http://localhost:3030/store/query>;
+        api:maxPageSize     100;
+        api:defaultPageSize 10;
+        api:defaultFormatter
+                            spec:HtmlFormatter;
+        .
+
+###############################################################################
+#
+# Describe a generic 'anything' as an example of an itemEndpoint.
+#
+###############################################################################
+spec:api    
+        api:endpoint    spec:anything .
+spec:anything
+        a                   api:ListEndpoint;
+        api:uriTemplate     "/anything";
+        api:selector        [
+            api:where       
+"""   ?item    a    [] .
+""";
+        ]; 
+        api:viewer          api:basicViewer, api:describeViewer, api:labelledDescribeViewer;
+        api:defaultViewer   api:describeViewer;
+        .
+
+###############################################################################
+#
+# Describe a generic 'about' as an example of an itemEndpoint.
+#
+###############################################################################
+spec:api    
+        api:endpoint    spec:about .
+spec:about
+        a                   api:ItemEndpoint;
+        api:uriTemplate     "/about?resource={uri}";
+        api:itemTemplate    "{uri}";
+        api:viewer          api:basicViewer, api:describeViewer, api:labelledDescribeViewer;
+        api:defaultViewer   api:describeViewer;
+        .
+
+##############################################################################
+#
+# List things related to a 'mentions' as an example of a ListEndpoint.
+#
+###############################################################################
+spec:api
+        api:endpoint        spec:mentions .
+
+spec:mentions
+        a                   api:ListEndpoint;
+        api:uriTemplate     "/mentions?resource={uri}";
+        api:variable [
+            api:name        "uri";
+            api:type        rdfs:Resource;  #a resource not a simple literal
+        ];
+        api:selector [
+            api:where       "?item ?p ?uri .";
+        ];
+        api:viewer          api:basicViewer, api:describeViewer, api:labelledDescribeViewer;
+        api:defaultViewer   api:describeViewer;
+        .
+
+###############################################################################
+#
+# Property Shortnames
+#
+###############################################################################
+rdfs:label  a               rdf:Property;
+            api:label       "label";
+            api:structured  "true"^^xsd:boolean;
+            .
+            
+rdf:type    a               rdf:Property;
+            rdfs:range      rdfs:Resource;
+            api:label       "type";
+            .
+            
+geo:lat     rdfs:range      xsd:decimal;
+            api:name        "lat";
+            .
+            
+geo:long    rdfs:range      xsd:decimal;
+            api:name        "long";
+            .
+  
+###############################################################################
+#         
+## FORMATTERS
+#
+###############################################################################
+spec:HtmlFormatter
+            a                       api:XsltFormatter ;
+            api:name                "html" ;
+            api:mimeType            "text/html;charset=UTF-8";
+            elda:metadataOptions    "bindings,versions,execution,formats";
+            api:stylesheet          "lda-assets/xslt/staging.xsl";
+            .
+
+###############################################################################
+#
+# Elda required variable settings for html formatter operation.
+#
+###############################################################################
+ spec:api  api:variable        [ api:name "_resourceRoot"; api:value "/lda-assets/" ];
+        api:variable           [ api:name "_strip_has"; api:value "yes" ];
+        .
+		
+###############################################################################
+# SPARQL Query generated shortname mappings
+###############################################################################
+#@prefix dc:      <http://purl.org/dc/elements/1.1/> .
+@prefix foaf:    <http://xmlns.com/foaf/0.1/> .
+@prefix void:    <http://rdfs.org/ns/void#> .
+@prefix qb:      <http://purl.org/linked-data/cube#> .
+#@prefix qudt:    <http://qudt.org/schema/qudt#> .
+#@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix time:    <http://www.w3.org/2006/time#> .
+#@prefix dct:     <http://purl.org/dc/terms/> .
+#@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+#@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+#@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+#@prefix api:     <http://purl.org/linked-data/api/vocab/> .
+#@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+
+<http://reference.data.gov.uk/def/reference/itemType>
+      rdfs:range    rdfs:Resource ;
+      api:label     "itemType" .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/LondonBorough>
+      rdf:type      rdfs:Class ;
+      api:label     "LondonBorough" .
+
+<http://environment.data.gov.uk/def/bathing-water/yearDesignated>
+      rdfs:range    rdfs:Resource ;
+      api:label     "yearDesignated" .
+
+<http://www.w3.org/2003/01/geo/wgs84_pos#lat>
+      rdfs:range    xsd:decimal ;
+      api:label     "lat" ;
+      api:multiValued  "true"^^xsd:boolean .
+
+<http://reference.data.gov.uk/def/reference/Status>
+      rdf:type      rdfs:Class ;
+      api:label     "Status" .
+
+<http://environment.data.gov.uk/def/bathing-water-profile/countyName>
+      api:label     "countyName" ;
+      api:multiValued  "true"^^xsd:boolean ;
+      api:structured  "true"^^xsd:boolean .
+
+<http://purl.org/dc/dcmitype/Text>
+      rdf:type      rdfs:Class ;
+      api:label     "Text" .
+
+dct:isFormatOf
+      rdfs:range    rdfs:Resource ;
+      api:label     "isFormatOf" .
+
+<http://environment.data.gov.uk/def/bwq-som/SuspensionOfMonitoring>
+      rdf:type      rdfs:Class ;
+      api:label     "SuspensionOfMonitoring" .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/Borough>
+      rdf:type      rdfs:Class ;
+      api:label     "Borough" .
+
+<http://environment.data.gov.uk/data/bathing-water-quality/LatestSampleSlice>
+      rdf:type      rdfs:Class ;
+      api:label     "LatestSampleSlice" .
+
+qb:sliceKey
+      rdfs:range    rdfs:Resource ;
+      api:label     "sliceKey" ;
+      api:multiValued  "true"^^xsd:boolean .
+
+<http://reference.data.gov.uk/def/intervals/ordinalWeekOfYear>
+      rdfs:range    xsd:integer ;
+      api:label     "ordinalWeekOfYear" .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/MetropolitanDistrict>
+      rdf:type      rdfs:Class ;
+      api:label     "MetropolitanDistrict" .
+
+<http://environment.data.gov.uk/def/bathing-water-quality/complianceCodeNotation>
+      rdfs:range    <http://environment.data.gov.uk/def/bathing-water-quality/complianceCode> ;
+      api:label     "complianceCodeNotation" ;
+      api:structured  "true"^^xsd:boolean .
+
+qb:sliceStructure
+      rdfs:range    rdfs:Resource ;
+      api:label     "sliceStructure" .
+
+dct:format
+      api:label     "format" ;
+      api:structured  "true"^^xsd:boolean .
+
+owl:DatatypeProperty
+      rdf:type      rdfs:Class ;
+      api:label     "DatatypeProperty" .
+
+<http://reference.data.gov.uk/def/intervals/ordinalMinuteOfHour>
+      rdfs:range    xsd:integer ;
+      api:label     "ordinalMinuteOfHour" .
+
+<http://reference.data.gov.uk/def/intervals/CalendarDay>
+      rdf:type      rdfs:Class ;
+      api:label     "CalendarDay" .
+
+qb:slice
+      rdfs:range    rdfs:Resource ;
+      api:label     "slice" ;
+      api:multiValued  "true"^^xsd:boolean .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/GreaterLondonAuthority>
+      rdf:type      rdfs:Class ;
+      api:label     "GreaterLondonAuthority" .
+
+foaf:primaryTopic
+      rdfs:range    rdfs:Resource ;
+      api:label     "primaryTopic" .
+
+rdfs:Datatype
+      rdf:type      rdfs:Class ;
+      api:label     "Datatype" .
+
+<http://environment.data.gov.uk/def/bathing-water-quality/faecalStreptococciCount>
+      rdfs:range    xsd:integer ;
+      api:label     "faecalStreptococciCount" .
+
+dct:license
+      rdfs:range    rdfs:Resource ;
+      api:label     "license" .
+
+<http://reference.data.gov.uk/def/intervals/Day>
+      rdf:type      rdfs:Class ;
+      api:label     "Day" .
+
+<http://location.data.gov.uk/def/ef/SamplingPoint/SamplingPoint>
+      rdf:type      rdfs:Class ;
+      api:label     "SamplingPoint" .
+
+skos:altLabel
+      api:label     "altLabel" ;
+      api:multiValued  "true"^^xsd:boolean ;
+      api:structured  "true"^^xsd:boolean .
+
+<http://location.data.gov.uk/def/ef/SamplingPoint/samplePointCode>
+      rdf:type      rdfs:Datatype ;
+      api:label     "samplePointCode" .
+
+dct:isVersionOf
+      rdfs:range    rdfs:Resource ;
+      api:label     "isVersionOf" .
+
+<http://data.ordnancesurvey.co.uk/ontology/spatialrelations/northing>
+      rdfs:range    xsd:decimal ;
+      api:label     "northing" ;
+      api:multiValued  "true"^^xsd:boolean .
+
+<http://environment.data.gov.uk/def/bwq-som/recordDateTime>
+      rdfs:range    xsd:dateTime ;
+      api:label     "recordDateTime" ;
+      api:structured  "true"^^xsd:boolean .
+
+dct:created
+      rdfs:range    xsd:date ;
+      api:label     "created" ;
+      api:structured  "true"^^xsd:boolean .
+
+rdfs:domain
+      rdfs:range    rdfs:Resource ;
+      api:label     "domain" .
+
+qb:DataStructureDefinition
+      rdf:type      rdfs:Class ;
+      api:label     "DataStructureDefinition" .
+
+<http://reference.data.gov.uk/def/intervals/ordinalDayOfYear>
+      rdfs:range    xsd:integer ;
+      api:label     "ordinalDayOfYear" .
+
+<http://environment.data.gov.uk/def/bathing-water/TransitionalBathingWater>
+      rdf:type      rdfs:Class ;
+      api:label     "TransitionalBathingWater" .
+
+<http://environment.data.gov.uk/def/bwq-som/somID>
+      rdf:type      rdfs:Datatype ;
+      api:label     "somID" .
+
+void:vocabulary
+      rdfs:range    rdfs:Resource ;
+      api:label     "vocabulary" ;
+      api:multiValued  "true"^^xsd:boolean .
+
+<http://environment.data.gov.uk/def/bathing-water-quality/sampleWeek>
+      rdfs:range    rdfs:Resource ;
+      api:label     "sampleWeek" .
+
+<http://www.w3.org/ns/org#hasUnit>
+      rdfs:range    rdfs:Resource ;
+      api:label     "hasUnit" ;
+      api:multiValued  "true"^^xsd:boolean .
+
+qb:CodedProperty
+      rdf:type      rdfs:Class ;
+      api:label     "CodedProperty" .
+
+<http://environment.data.gov.uk/def/bathing-water/regionalOrganization>
+      rdfs:range    rdfs:Resource ;
+      api:label     "regionalOrganization" .
+
+<http://environment.data.gov.uk/def/bathing-water-profile/workingWithPrivateOwnersStatement>
+      api:label     "workingWithPrivateOwnersStatement" ;
+      api:multiValued  "true"^^xsd:boolean ;
+      api:structured  "true"^^xsd:boolean .
+
+<http://environment.data.gov.uk/def/bathing-water-profile/esoOutfallsGeneralStatement>
+      api:label     "esoOutfallsGeneralStatement" ;
+      api:structured  "true"^^xsd:boolean .
+
+owl:FunctionalProperty
+      rdf:type      rdfs:Class ;
+      api:label     "FunctionalProperty" .
+
+<http://data.ordnancesurvey.co.uk/ontology/geometry/extent>
+      rdfs:range    rdfs:Resource ;
+      api:label     "extent" .
+
+<http://environment.data.gov.uk/def/version/currentVersion>
+      rdfs:range    rdfs:Resource ;
+      api:label     "currentVersion" .
+
+qb:Slice
+      rdf:type      rdfs:Class ;
+      api:label     "Slice" .
+
+<http://environment.data.gov.uk/def/bathing-water-quality/intestinalEnterococciQualifier>
+      rdfs:range    rdfs:Resource ;
+      api:label     "intestinalEnterococciQualifier" .
+
+<http://environment.data.gov.uk/def/bathing-water-quality/entrovirusQualifier>
+      rdfs:range    rdfs:Resource ;
+      api:label     "entrovirusQualifier" .
+
+<http://location.data.gov.uk/def/common/Geometry/srs>
+      rdfs:range    rdfs:Resource ;
+      api:label     "srs" .
+
+skos:topConceptOf
+      rdfs:range    rdfs:Resource ;
+      api:label     "topConceptOf" .
+
+<http://environment.data.gov.uk/def/bathing-water-profile/localAuthorityGeneralStatement>
+      api:label     "localAuthorityGeneralStatement" ;
+      api:structured  "true"^^xsd:boolean .
+
+rdf:type
+      rdfs:range    rdfs:Resource ;
+      api:label     "type" ;
+      api:multiValued  "true"^^xsd:boolean .
+
+<http://environment.data.gov.uk/def/bathing-water-quality/BySamplingPointSlice>
+      rdf:type      rdfs:Class ;
+      api:label     "BySamplingPointSlice" .
+
+<http://environment.data.gov.uk/def/bathing-water-quality/abnormalWeatherException>
+      rdfs:range    xsd:boolean ;
+      api:label     "abnormalWeatherException" ;
+      api:structured  "true"^^xsd:boolean .
+
+dct:publisher
+      rdfs:range    rdfs:Resource ;
+      api:label     "publisher" .
+
+<http://environment.data.gov.uk/def/bathing-water-profile/streamsRiversStatement>
+      api:label     "streamsRiversStatement" ;
+      api:multiValued  "true"^^xsd:boolean ;
+      api:structured  "true"^^xsd:boolean .
+
+<http://data.ordnancesurvey.co.uk/ontology/geometry/AbstractGeometry>
+      rdf:type      rdfs:Class ;
+      api:label     "AbstractGeometry" .
+
+qb:codeList
+      rdfs:range    rdfs:Resource ;
+      api:label     "codeList" .
+
+time:intervalMetBy
+      rdfs:range    rdfs:Resource ;
+      api:label     "intervalMetBy" .
+
+qb:structure
+      rdfs:range    rdfs:Resource ;
+      api:label     "structure" .
+
+<http://environment.data.gov.uk/def/bathing-water-quality/presenceNotation>
+      rdfs:range    <http://environment.data.gov.uk/def/bathing-water-quality/presenceCode> ;
+      api:label     "presenceNotation" ;
+      api:structured  "true"^^xsd:boolean .
+
+<http://reference.data.gov.uk/def/intervals/dayOfWeek>
+      rdfs:range    rdfs:Resource ;
+      api:label     "dayOfWeek" .
+
+rdfs:Class
+      rdf:type      rdfs:Class ;
+      api:label     "rdfs_Class" .
+
+owl:hasValue
+      rdfs:range    rdfs:Resource ;
+      api:label     "hasValue" .
+
+<http://environment.data.gov.uk/def/bathing-water-profile/standardLanguageCollection>
+      rdfs:range    rdfs:Resource ;
+      api:label     "standardLanguageCollection" .
+
+<http://environment.data.gov.uk/def/bathing-water-profile/algaeGeneralStatement>
+      api:label     "algaeGeneralStatement" ;
+      api:multiValued  "true"^^xsd:boolean ;
+      api:structured  "true"^^xsd:boolean .
+
+void:Dataset
+      rdf:type      rdfs:Class ;
+      api:label     "Dataset" .
+
+<http://environment.data.gov.uk/def/bathing-water-quality/faecalColiformCount>
+      rdfs:range    xsd:integer ;
+      api:label     "faecalColiformCount" .
+
+owl:versionInfo
+      api:label     "versionInfo" ;
+      api:structured  "true"^^xsd:boolean .
+
+<http://www.w3.org/2003/01/geo/wgs84_pos#long>
+      rdfs:range    xsd:decimal ;
+      api:label     "long" ;
+      api:multiValued  "true"^^xsd:boolean .
+
+<http://location.data.gov.uk/def/common/Geometry/lowerCorner>
+      rdfs:range    rdfs:Resource ;
+      api:label     "lowerCorner" .
+
+<http://environment.data.gov.uk/def/bathing-water-profile/workingWithFarmersStatement>
+      api:label     "workingWithFarmersStatement" ;
+      api:multiValued  "true"^^xsd:boolean ;
+      api:structured  "true"^^xsd:boolean .
+
+skos:definition
+      api:label     "skos_definition" ;
+      api:multiValued  "true"^^xsd:boolean ;
+      api:structured  "true"^^xsd:boolean .
+
+<http://data.ordnancesurvey.co.uk/ontology/geometry/asGML>
+      rdfs:range    rdf:XMLLiteral ;
+      api:label     "asGML" ;
+      api:structured  "true"^^xsd:boolean .
+
+<http://location.data.gov.uk/def/ef/SamplingPoint/samplingPoint>
+      rdfs:range    rdfs:Resource ;
+      api:label     "samplingPoint" .
+
+<http://environment.data.gov.uk/def/bwq-som/expectedEndOfSuspension>
+      rdfs:range    xsd:date ;
+      api:label     "expectedEndOfSuspension" ;
+      api:structured  "true"^^xsd:boolean .
+
+owl:sameAs
+      rdfs:range    rdfs:Resource ;
+      api:label     "sameAs" ;
+      api:multiValued  "true"^^xsd:boolean .
+
+qb:dataSet
+      rdfs:range    rdfs:Resource ;
+      api:label     "dataSet" .
+
+<http://environment.data.gov.uk/def/bathing-water-quality/CountQualifier>
+      rdf:type      rdfs:Class ;
+      api:label     "CountQualifier" .
+
+<http://reference.data.gov.uk/def/intervals/CalendarYear>
+      rdf:type      rdfs:Class ;
+      api:label     "CalendarYear" .
+
+<http://environment.data.gov.uk/def/bathing-water/CoastalBathingWater>
+      rdf:type      rdfs:Class ;
+      api:label     "CoastalBathingWater" .
+
+<http://environment.data.gov.uk/def/bathing-water-profile/pollutionManagementGeneralStatement>
+      api:label     "pollutionManagementGeneralStatement" ;
+      api:multiValued  "true"^^xsd:boolean ;
+      api:structured  "true"^^xsd:boolean .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/District>
+      rdf:type      rdfs:Class ;
+      api:label     "District" .
+
+<http://environment.data.gov.uk/def/bathing-water/BathingWater>
+      rdf:type      rdfs:Class ;
+      api:label     "BathingWater" .
+
+<http://location.data.gov.uk/def/common/Geometry/envelope>
+      rdfs:range    rdfs:Resource ;
+      api:label     "envelope" .
+
+<http://reference.data.gov.uk/def/intervals/ordinalMonthOfYear>
+      rdfs:range    xsd:integer ;
+      api:label     "ordinalMonthOfYear" .
+
+time:intervalDuring
+      rdfs:range    rdfs:Resource ;
+      api:label     "intervalDuring" ;
+      api:multiValued  "true"^^xsd:boolean .
+
+<http://location.data.gov.uk/def/ef/BathingWaterProfileFeature/RSI>
+      rdf:type      rdfs:Class ;
+      api:label     "RSI" .
+
+<http://location.data.gov.uk/def/common/Geometry/upperCorner>
+      rdfs:range    rdfs:Resource ;
+      api:label     "upperCorner" .
+
+<http://environment.data.gov.uk/def/bathing-water-quality/Presence>
+      rdf:type      rdfs:Class ;
+      api:label     "Presence" .
+
+qb:component
+      rdfs:range    rdfs:Resource ;
+      api:label     "component" ;
+      api:multiValued  "true"^^xsd:boolean .
+
+<http://statistics.data.gov.uk/def/administrative-geography/district>
+      rdfs:range    rdfs:Resource ;
+      api:label     "district" ;
+      api:multiValued  "true"^^xsd:boolean .
+
+<http://reference.data.gov.uk/def/intervals/ordinalQuarterOfYear>
+      rdfs:range    xsd:integer ;
+      api:label     "ordinalQuarterOfYear" .
+
+<http://location.data.gov.uk/def/ef/ZoneOfInfluence/zoneOfInfluence>
+      rdfs:range    rdfs:Resource ;
+      api:label     "zoneOfInfluence" .
+
+rdfs:seeAlso
+      rdfs:range    rdfs:Resource ;
+      api:label     "seeAlso" ;
+      api:multiValued  "true"^^xsd:boolean .
+
+<http://data.ordnancesurvey.co.uk/ontology/spatialrelations/easting>
+      rdfs:range    xsd:decimal ;
+      api:label     "easting" ;
+      api:multiValued  "true"^^xsd:boolean .
+
+<http://reference.data.gov.uk/def/intervals/nextInterval>
+      rdfs:range    rdfs:Resource ;
+      api:label     "nextInterval" .
+
+<http://statistics.data.gov.uk/def/administrative-geography/localAuthority>
+      rdfs:range    rdfs:Resource ;
+      api:label     "localAuthority" .
+
+<http://environment.data.gov.uk/def/bathing-water-quality/bathingWater>
+      rdfs:range    rdfs:Resource ;
+      api:label     "bwq_bathingWater" .
+
+rdf:XMLLiteral
+      rdf:type      rdfs:Datatype ;
+      api:label     "XMLLiteral" .
+
+<http://location.data.gov.uk/def/ef/BathingWaterProfileFeature/ESO>
+      rdf:type      rdfs:Class ;
+      api:label     "ESO" .
+
+skos:note
+      api:label     "note" ;
+      api:structured  "true"^^xsd:boolean .
+
+skos:scopeNote
+      api:label     "scopeNote" ;
+      api:multiValued  "true"^^xsd:boolean ;
+      api:structured  "true"^^xsd:boolean .
+
+qb:dimension
+      rdfs:range    rdfs:Resource ;
+      api:label     "dimension" .
+
+void:dataDump
+      rdfs:range    rdfs:Resource ;
+      api:label     "dataDump" ;
+      api:multiValued  "true"^^xsd:boolean .
+
+skos:notation
+      rdfs:range    <http://environment.data.gov.uk/def/bathing-water/eubwid> ;
+      api:label     "notation" ;
+      api:structured  "true"^^xsd:boolean .
+
+<http://environment.data.gov.uk/def/bathing-water-profile/misconnectionsStatement>
+      api:label     "misconnectionsStatement" ;
+      api:multiValued  "true"^^xsd:boolean ;
+      api:structured  "true"^^xsd:boolean .
+
+<http://environment.data.gov.uk/def/bathing-water-quality/countQualifierCode>
+      rdf:type      rdfs:Datatype ;
+      api:label     "countQualifierCode" .
+
+owl:Ontology
+      rdf:type      rdfs:Class ;
+      api:label     "Ontology" .
+
+<http://environment.data.gov.uk/def/bathing-water-profile/localAuthorityStatement>
+      api:label     "localAuthorityStatement" ;
+      api:multiValued  "true"^^xsd:boolean ;
+      api:structured  "true"^^xsd:boolean .
+
+skos:inScheme
+      rdfs:range    rdfs:Resource ;
+      api:label     "inScheme" .
+
+<http://environment.data.gov.uk/def/bathing-water-quality/escherichiaColiQualifier>
+      rdfs:range    rdfs:Resource ;
+      api:label     "escherichiaColiQualifier" .
+
+<http://environment.data.gov.uk/def/bathing-water-profile/StandardLanguageCollection>
+      rdf:type      rdfs:Class ;
+      api:label     "StandardLanguageCollection" .
+
+rdfs:subPropertyOf
+      rdfs:range    rdfs:Resource ;
+      api:label     "subPropertyOf" .
+
+<http://environment.data.gov.uk/def/bathing-water-quality/complianceCode>
+      rdf:type      rdfs:Datatype ;
+      api:label     "complianceCode" .
+
+time:intervalMeets
+      rdfs:range    rdfs:Resource ;
+      api:label     "intervalMeets" .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/County>
+      rdf:type      rdfs:Class ;
+      api:label     "County" .
+
+<http://environment.data.gov.uk/def/bathing-water-quality/faecalColiformQualifier>
+      rdfs:range    rdfs:Resource ;
+      api:label     "faecalColiformQualifier" .
+
+<http://location.data.gov.uk/def/common/Geometry/dimensions>
+      rdfs:range    xsd:integer ;
+      api:label     "dimensions" .
+
+<http://reference.data.gov.uk/def/intervals/monthOfYear>
+      rdfs:range    rdfs:Resource ;
+      api:label     "monthOfYear" .
+
+<http://location.data.gov.uk/def/common/Geometry/x>
+      rdfs:range    xsd:decimal ;
+      api:label     "x" .
+
+<http://reference.data.gov.uk/def/reference/uriSet>
+      rdfs:range    rdfs:Resource ;
+      api:label     "uriSet" .
+
+dct:title
+      api:label     "title" ;
+      api:multiValued  "true"^^xsd:boolean ;
+      api:structured  "true"^^xsd:boolean .
+
+<http://environment.data.gov.uk/def/bwq-som/priorAssessment>
+      rdfs:range    rdfs:Resource ;
+      api:label     "priorAssessment" .
+
+<http://environment.data.gov.uk/def/bathing-water-profile/latestBathingWaterProfile>
+      rdfs:range    rdfs:Resource ;
+      api:label     "latestBathingWaterProfile" .
+
+dct:contributor
+      rdfs:range    rdfs:Resource ;
+      api:label     "contributor" .
+
+time:hasEnd
+      rdfs:range    rdfs:Resource ;
+      api:label     "hasEnd" .
+
+<http://location.data.gov.uk/def/ef/ZoneOfInfluence/zoiNotation>
+      rdfs:range    <http://location.data.gov.uk/def/ef/ZoneOfInfluence/zoiCode> ;
+      api:label     "zoiNotation" ;
+      api:structured  "true"^^xsd:boolean .
+
+void:sparqlEndpoint
+      rdfs:range    rdfs:Resource ;
+      api:label     "sparqlEndpoint" .
+
+owl:cardinality
+      rdfs:range    xsd:integer ;
+      api:label     "cardinality" .
+
+<http://environment.data.gov.uk/def/bathing-water-profile/stwOutfallsStatement>
+      api:label     "stwOutfallsStatement" ;
+      api:multiValued  "true"^^xsd:boolean ;
+      api:structured  "true"^^xsd:boolean .
+
+<http://reference.data.gov.uk/def/intervals/ordinalWeekOfYearYear>
+      rdfs:range    xsd:integer ;
+      api:label     "ordinalWeekOfYearYear" .
+
+qb:observation
+      rdfs:range    rdfs:Resource ;
+      api:label     "observation" ;
+      api:multiValued  "true"^^xsd:boolean .
+
+xsd:date
+      rdf:type      rdfs:Datatype ;
+      api:label     "date" .
+
+<http://reference.data.gov.uk/def/central-government/PublicBody>
+      rdf:type      rdfs:Class ;
+      api:label     "PublicBody" .
+
+qb:DimensionProperty
+      rdf:type      rdfs:Class ;
+      api:label     "DimensionProperty" .
+
+<http://environment.data.gov.uk/def/bathing-water-quality/BySamplingPointYearSlice>
+      rdf:type      rdfs:Class ;
+      api:label     "BySamplingPointYearSlice" .
+
+<http://location.data.gov.uk/def/ef/BathingWaterProfileFeature/DO>
+      rdf:type      rdfs:Class ;
+      api:label     "DO" .
+
+<http://environment.data.gov.uk/def/bathing-water/waterQualityImpactedByHeavyRain>
+      rdfs:range    xsd:boolean ;
+      api:label     "waterQualityImpactedByHeavyRain" ;
+      api:structured  "true"^^xsd:boolean .
+
+<http://reference.data.gov.uk/def/intervals/hasXsdDurationDescription>
+      rdfs:range    xsd:duration ;
+      api:label     "hasXsdDurationDescription" ;
+      api:structured  "true"^^xsd:boolean .
+
+<http://location.data.gov.uk/def/common/Geometry/y>
+      rdfs:range    xsd:decimal ;
+      api:label     "y" .
+
+<http://statistics.data.gov.uk/def/administrative-geography/country>
+      rdfs:range    rdfs:Resource ;
+      api:label     "country" .
+
+skos:ConceptScheme
+      rdf:type      rdfs:Class ;
+      api:label     "ConceptScheme" .
+
+qb:MeasureProperty
+      rdf:type      rdfs:Class ;
+      api:label     "MeasureProperty" .
+
+<http://environment.data.gov.uk/def/bathing-water-quality/totalColiformCount>
+      rdfs:range    xsd:integer ;
+      api:label     "totalColiformCount" .
+
+<http://environment.data.gov.uk/def/bwq-som/notation>
+      rdfs:range    <http://environment.data.gov.uk/def/bwq-som/somID> ;
+      api:label     "som_notation" ;
+      api:structured  "true"^^xsd:boolean .
+
+<http://environment.data.gov.uk/def/bwq-som/relatedAssessment>
+      rdfs:range    rdfs:Resource ;
+      api:label     "relatedAssessment" ;
+      api:multiValued  "true"^^xsd:boolean .
+
+<http://location.data.gov.uk/def/common/Geometry/Envelope>
+      rdf:type      rdfs:Class ;
+      api:label     "Envelope" .
+
+<http://reference.data.gov.uk/def/intervals/previousInterval>
+      rdfs:range    rdfs:Resource ;
+      api:label     "previousInterval" .
+
+<http://environment.data.gov.uk/def/bathing-water-quality/RecordStatus>
+      rdf:type      rdfs:Class ;
+      api:label     "RecordStatus" .
+
+owl:Restriction
+      rdf:type      rdfs:Class ;
+      api:label     "Restriction" .
+
+foaf:mbox
+      api:label     "mbox" ;
+      api:structured  "true"^^xsd:boolean .
+
+foaf:name
+      api:label     "foaf_name" ;
+      api:structured  "true"^^xsd:boolean .
+
+<http://environment.data.gov.uk/def/bathing-water-quality/sampleClassification>
+      rdfs:range    rdfs:Resource ;
+      api:label     "sampleClassification" .
+
+rdfs:comment
+      api:label     "comment" ;
+      api:multiValued  "true"^^xsd:boolean ;
+      api:structured  "true"^^xsd:boolean .
+
+dct:source
+      rdfs:range    rdfs:Resource ;
+      api:label     "source" ;
+      api:multiValued  "true"^^xsd:boolean .
+
+<http://reference.data.gov.uk/def/reference/status>
+      rdfs:range    rdfs:Resource ;
+      api:label     "status" .
+
+<http://environment.data.gov.uk/def/version/versionString>
+      api:label     "versionString" ;
+      api:structured  "true"^^xsd:boolean .
+
+<http://environment.data.gov.uk/def/bathing-water-profile/bathingWaterDescription>
+      api:label     "bathingWaterDescription" ;
+      api:multiValued  "true"^^xsd:boolean ;
+      api:structured  "true"^^xsd:boolean .
+
+<http://location.data.gov.uk/def/ef/BathingWaterProfileFeature/Feature>
+      rdf:type      rdfs:Class ;
+      api:label     "Feature" .
+
+rdfs:isDefinedBy
+      rdfs:range    rdfs:Resource ;
+      api:label     "isDefinedBy" .
+
+time:hasBeginning
+      rdfs:range    rdfs:Resource ;
+      api:label     "hasBeginning" .
+
+<http://environment.data.gov.uk/def/version/interval>
+      rdfs:range    rdfs:Resource ;
+      api:label     "interval" .
+
+qb:AttributeProperty
+      rdf:type      rdfs:Class ;
+      api:label     "AttributeProperty" .
+
+owl:ObjectProperty
+      rdf:type      rdfs:Class ;
+      api:label     "ObjectProperty" .
+
+<http://reference.data.gov.uk/def/intervals/ordinalHourOfDay>
+      rdfs:range    xsd:integer ;
+      api:label     "ordinalHourOfDay" .
+
+<http://environment.data.gov.uk/def/bathing-water-quality/sampleYear>
+      rdfs:range    rdfs:Resource ;
+      api:label     "sampleYear" .
+
+<http://environment.data.gov.uk/def/bathing-water-profile/zoiDescription>
+      api:label     "zoiDescription" ;
+      api:multiValued  "true"^^xsd:boolean ;
+      api:structured  "true"^^xsd:boolean .
+
+qb:Observation
+      rdf:type      rdfs:Class ;
+      api:label     "Observation" .
+
+dct:description
+      api:label     "description" ;
+      api:structured  "true"^^xsd:boolean .
+
+<http://reference.data.gov.uk/def/intervals/ordinalSecondOfMinute>
+      rdfs:range    xsd:integer ;
+      api:label     "ordinalSecondOfMinute" .
+
+<http://environment.data.gov.uk/def/bathing-water-quality/ByYearSlice>
+      rdf:type      rdfs:Class ;
+      api:label     "ByYearSlice" .
+
+<http://environment.data.gov.uk/def/bathing-water-quality/ComplianceAssessment>
+      rdf:type      rdfs:Class ;
+      api:label     "ComplianceAssessment" .
+
+qb:DataSet
+      rdf:type      rdfs:Class ;
+      api:label     "DataSet" .
+
+<http://location.data.gov.uk/def/ef/ZoneOfInfluence/ZoneOfInfluence>
+      rdf:type      rdfs:Class ;
+      api:label     "ZoneOfInfluence" .
+
+time:Instant
+      rdf:type      rdfs:Class ;
+      api:label     "Instant" .
+
+void:subset
+      rdfs:range    rdfs:Resource ;
+      api:label     "subset" ;
+      api:multiValued  "true"^^xsd:boolean .
+
+<http://reference.data.gov.uk/def/intervals/ordinalHalfOfYear>
+      rdfs:range    xsd:integer ;
+      api:label     "ordinalHalfOfYear" .
+
+<http://environment.data.gov.uk/def/bathing-water-profile/macroAlgaeStatement>
+      api:label     "macroAlgaeStatement" ;
+      api:multiValued  "true"^^xsd:boolean ;
+      api:structured  "true"^^xsd:boolean .
+
+<http://environment.data.gov.uk/def/bathing-water-quality/intestinalEnterococciCount>
+      rdfs:range    xsd:integer ;
+      api:label     "intestinalEnterococciCount" .
+
+rdfs:subClassOf
+      rdfs:range    rdfs:Resource ;
+      api:label     "subClassOf" ;
+      api:multiValued  "true"^^xsd:boolean .
+
+<http://environment.data.gov.uk/def/bathing-water-profile/workingWithIndustryStatement>
+      api:label     "workingWithIndustryStatement" ;
+      api:multiValued  "true"^^xsd:boolean ;
+      api:structured  "true"^^xsd:boolean .
+
+<http://environment.data.gov.uk/def/bathing-water/bathingWater>
+      rdfs:range    rdfs:Resource ;
+      api:label     "bathingWater" ;
+      api:multiValued  "true"^^xsd:boolean .
+
+time:hasDurationDescription
+      rdfs:range    rdfs:Resource ;
+      api:label     "hasDurationDescription" .
+
+time:dayOfWeek
+      rdfs:range    rdfs:Resource ;
+      api:label     "time_dayOfWeek" .
+
+<http://environment.data.gov.uk/def/bathing-water-quality/countQualifierNotation>
+      rdfs:range    <http://environment.data.gov.uk/def/bathing-water-quality/countQualifierCode> ;
+      api:label     "countQualifierNotation" ;
+      api:structured  "true"^^xsd:boolean .
+
+<http://environment.data.gov.uk/def/bathing-water-quality/SampleDataset>
+      rdf:type      rdfs:Class ;
+      api:label     "SampleDataset" .
+
+<http://environment.data.gov.uk/def/bwq-som/relatedSuspension>
+      rdfs:range    rdfs:Resource ;
+      api:label     "relatedSuspension" .
+
+qb:attribute
+      rdfs:range    rdfs:Resource ;
+      api:label     "attribute" .
+
+qb:SliceKey
+      rdf:type      rdfs:Class ;
+      api:label     "SliceKey" .
+
+<http://environment.data.gov.uk/def/bathing-water-quality/recordDate>
+      rdfs:range    xsd:date ;
+      api:label     "recordDate" ;
+      api:structured  "true"^^xsd:boolean .
+
+<http://environment.data.gov.uk/def/bathing-water-quality/totalColiformQualifier>
+      rdfs:range    rdfs:Resource ;
+      api:label     "totalColiformQualifier" .
+
+<http://environment.data.gov.uk/def/bathing-water-quality/complianceClassification>
+      rdfs:range    rdfs:Resource ;
+      api:label     "complianceClassification" .
+
+<http://reference.data.gov.uk/def/intervals/Week>
+      rdf:type      rdfs:Class ;
+      api:label     "Week" .
+
+<http://environment.data.gov.uk/def/bathing-water-profile/applicableYear>
+      rdfs:range    rdfs:Resource ;
+      api:label     "applicableYear" .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/inCounty>
+      rdfs:range    rdfs:Resource ;
+      api:label     "inCounty" .
+
+<http://www.w3.org/ns/org#Organization>
+      rdf:type      rdfs:Class ;
+      api:label     "Organization" .
+
+<http://reference.data.gov.uk/def/intervals/ordinalDayOfWeek>
+      rdfs:range    xsd:integer ;
+      api:label     "ordinalDayOfWeek" .
+
+rdf:Property
+      rdf:type      rdfs:Class ;
+      api:label     "Property" .
+
+foaf:isPrimaryTopicOf
+      rdfs:range    rdfs:Resource ;
+      api:label     "isPrimaryTopicOf" .
+
+<http://environment.data.gov.uk/def/bathing-water-profile/webResImage>
+      rdfs:range    rdfs:Resource ;
+      api:label     "webResImage" .
+
+<http://environment.data.gov.uk/def/bathing-water-quality/presenceCode>
+      rdf:type      rdfs:Datatype ;
+      api:label     "presenceCode" .
+
+<http://environment.data.gov.uk/def/bathing-water-quality/escherichiaColiCount>
+      rdfs:range    xsd:integer ;
+      api:label     "escherichiaColiCount" .
+
+<http://environment.data.gov.uk/def/bathing-water-quality/ByWeekSlice>
+      rdf:type      rdfs:Class ;
+      api:label     "ByWeekSlice" .
+
+skos:preflabel
+      api:label     "preflabel" ;
+      api:structured  "true"^^xsd:boolean .
+
+xsd:integer
+      rdf:type      rdfs:Datatype ;
+      api:label     "integer" .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/gssCode>
+      api:label     "gssCode" ;
+      api:structured  "true"^^xsd:boolean .
+
+<http://environment.data.gov.uk/def/bathing-water-profile/stwOutfallsGeneralStatement>
+      api:label     "stwOutfallsGeneralStatement" ;
+      api:structured  "true"^^xsd:boolean .
+
+<http://purl.org/linked-data/api/vocab#extendedMetadataVersion>
+      rdfs:range    rdfs:Resource ;
+      api:label     "extendedMetadataVersion" .
+
+rdfs:label
+      api:label     "label" ;
+      api:multiValued  "true"^^xsd:boolean ;
+      api:structured  "true"^^xsd:boolean .
+
+<http://environment.data.gov.uk/def/bathing-water/SedimentType>
+      rdf:type      rdfs:Class ;
+      api:label     "SedimentType" .
+
+skos:Concept
+      rdf:type      rdfs:Class ;
+      api:label     "Concept" .
+
+<http://environment.data.gov.uk/def/bathing-water/eubwid>
+      rdf:type      rdfs:Datatype ;
+      api:label     "eubwid" .
+
+owl:onProperty
+      rdfs:range    rdfs:Resource ;
+      api:label     "onProperty" .
+
+<http://environment.data.gov.uk/def/bathing-water-quality/recordStatus>
+      rdfs:range    rdfs:Resource ;
+      api:label     "recordStatus" .
+
+skos:prefLabel
+      api:label     "prefLabel" ;
+      api:multiValued  "true"^^xsd:boolean ;
+      api:structured  "true"^^xsd:boolean .
+
+xsd:decimal
+      rdf:type      rdfs:Datatype ;
+      api:label     "decimal" .
+
+<http://environment.data.gov.uk/def/bwq-som/followingSuspension>
+      rdfs:range    rdfs:Resource ;
+      api:label     "followingSuspension" .
+
+<http://environment.data.gov.uk/def/bathing-water-quality/salmonellaPresent>
+      rdfs:range    rdfs:Resource ;
+      api:label     "salmonellaPresent" .
+
+<http://environment.data.gov.uk/def/bathing-water/LakeBathingWater>
+      rdf:type      rdfs:Class ;
+      api:label     "LakeBathingWater" .
+
+<http://environment.data.gov.uk/def/bathing-water-quality/ComplianceDataset>
+      rdf:type      rdfs:Class ;
+      api:label     "ComplianceDataset" .
+
+<http://location.data.gov.uk/def/ef/BathingWaterProfileFeature/EnduringFeature>
+      rdf:type      rdfs:Class ;
+      api:label     "EnduringFeature" .
+
+<http://environment.data.gov.uk/def/bathing-water-quality/sampleDateTime>
+      rdfs:range    rdfs:Resource ;
+      api:label     "sampleDateTime" .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/CivilAdministrativeArea>
+      rdf:type      rdfs:Class ;
+      api:label     "CivilAdministrativeArea" .
+
+<http://statistics.data.gov.uk/def/administrative-geography/county>
+      rdfs:range    rdfs:Resource ;
+      api:label     "county" .
+
+foaf:Document
+      rdf:type      rdfs:Class ;
+      api:label     "Document" .
+
+<http://environment.data.gov.uk/def/bathing-water-profile/esoOutfallsStatement>
+      api:label     "esoOutfallsStatement" ;
+      api:multiValued  "true"^^xsd:boolean ;
+      api:structured  "true"^^xsd:boolean .
+
+<http://environment.data.gov.uk/def/bathing-water-quality/faecalStreptococciQualifier>
+      rdfs:range    rdfs:Resource ;
+      api:label     "faecalStreptococciQualifier" .
+
+<http://location.data.gov.uk/def/ef/BathingWaterProfileFeature/SWO>
+      rdf:type      rdfs:Class ;
+      api:label     "SWO" .
+
+<http://environment.data.gov.uk/def/bathing-water-quality/latestComplianceAssessment>
+      rdfs:range    rdfs:Resource ;
+      api:label     "latestComplianceAssessment" .
+
+dct:isReplacedBy
+      rdfs:range    rdfs:Resource ;
+      api:label     "isReplacedBy" .
+
+<http://environment.data.gov.uk/def/bathing-water/sedimentTypesPresent>
+      rdfs:range    rdfs:Resource ;
+      api:label     "sedimentTypesPresent" ;
+      api:multiValued  "true"^^xsd:boolean .
+
+<http://reference.data.gov.uk/def/intervals/ordinalDayOfMonth>
+      rdfs:range    xsd:integer ;
+      api:label     "ordinalDayOfMonth" .
+
+<http://location.data.gov.uk/def/ef/SamplingPoint/samplePointNotation>
+      rdfs:range    <http://location.data.gov.uk/def/ef/SamplingPoint/samplePointCode> ;
+      api:label     "samplePointNotation" ;
+      api:structured  "true"^^xsd:boolean .
+
+rdfs:range
+      rdfs:range    rdfs:Resource ;
+      api:label     "range" .
+
+<http://environment.data.gov.uk/def/bathing-water-quality/samplingPoint>
+      rdfs:range    rdfs:Resource ;
+      api:label     "bwq_samplingPoint" .
+
+void:uriRegexPattern
+      api:label     "uriRegexPattern" ;
+      api:multiValued  "true"^^xsd:boolean ;
+      api:structured  "true"^^xsd:boolean .
+
+<http://reference.data.gov.uk/def/intervals/ordinalYear>
+      rdfs:range    xsd:integer ;
+      api:label     "ordinalYear" .
+
+dct:replaces
+      rdfs:range    rdfs:Resource ;
+      api:label     "replaces" .
+
+<http://reference.data.gov.uk/def/intervals/Iso8601Week>
+      rdf:type      rdfs:Class ;
+      api:label     "Iso8601Week" .
+
+<http://environment.data.gov.uk/def/bathing-water-profile/EnduringBathingWaterProfile>
+      rdf:type      rdfs:Class ;
+      api:label     "EnduringBathingWaterProfile" .
+
+<http://environment.data.gov.uk/def/bathing-water-quality/Compliance>
+      rdf:type      rdfs:Class ;
+      api:label     "Compliance" .
+
+<http://environment.data.gov.uk/def/bathing-water/yearDedesignated>
+      rdfs:range    rdfs:Resource ;
+      api:label     "yearDedesignated" .
+
+<http://environment.data.gov.uk/def/bwq-som/endOfSuspension>
+      rdfs:range    xsd:dateTime ;
+      api:label     "endOfSuspension" ;
+      api:structured  "true"^^xsd:boolean .
+
+<http://environment.data.gov.uk/def/bathing-water-quality/latestSampleAssessment>
+      rdfs:range    rdfs:Resource ;
+      api:label     "latestSampleAssessment" .
+
+dct:hasFormat
+      rdfs:range    rdfs:Resource ;
+      api:label     "hasFormat" ;
+      api:multiValued  "true"^^xsd:boolean .
+
+<http://location.data.gov.uk/def/common/Geometry/Geometry>
+      rdf:type      rdfs:Class ;
+      api:label     "Geometry" .
+
+owl:inverseOf
+      rdfs:range    rdfs:Resource ;
+      api:label     "inverseOf" .
+
+qb:measure
+      rdfs:range    rdfs:Resource ;
+      api:label     "measure" .
+
+dct:hasVersion
+      rdfs:range    rdfs:Resource ;
+      api:label     "hasVersion" .
+
+<http://location.data.gov.uk/def/common/Geometry/Point>
+      rdf:type      rdfs:Class ;
+      api:label     "Point" .
+
+<http://environment.data.gov.uk/def/bwq-som/startOfSuspension>
+      rdfs:range    xsd:dateTime ;
+      api:label     "startOfSuspension" ;
+      api:structured  "true"^^xsd:boolean .
+
+<http://environment.data.gov.uk/def/bathing-water-profile/historyStatement>
+      api:label     "historyStatement" ;
+      api:structured  "true"^^xsd:boolean .
+
+dct:modified
+      rdfs:range    xsd:date ;
+      api:label     "modified" ;
+      api:multiValued  "true"^^xsd:boolean ;
+      api:structured  "true"^^xsd:boolean .
+
+<http://location.data.gov.uk/def/ef/BathingWaterProfileFeature/TSO>
+      rdf:type      rdfs:Class ;
+      api:label     "TSO" .
+
+xsd:dateTime
+      rdf:type      rdfs:Datatype ;
+      api:label     "dateTime" .
+
+<http://environment.data.gov.uk/def/bwq-som/priorSuspension>
+      rdfs:range    rdfs:Resource ;
+      api:label     "priorSuspension" .
+
+xsd:duration
+      rdf:type      rdfs:Datatype ;
+      api:label     "duration" .
+
+<http://location.data.gov.uk/def/ef/ZoneOfInfluence/zoiCode>
+      rdf:type      rdfs:Datatype ;
+      api:label     "zoiCode" .
+
+<http://environment.data.gov.uk/def/bathing-water-quality/inYearDetail>
+      rdfs:range    rdfs:Resource ;
+      api:label     "inYearDetail" .
+
+<http://environment.data.gov.uk/def/bathing-water-quality/SampleAssessment>
+      rdf:type      rdfs:Class ;
+      api:label     "SampleAssessment" .
+
+<http://environment.data.gov.uk/def/bathing-water-profile/eaInvestigationsStatement>
+      api:label     "eaInvestigationsStatement" ;
+      api:multiValued  "true"^^xsd:boolean ;
+      api:structured  "true"^^xsd:boolean .
+
+<http://environment.data.gov.uk/def/bathing-water/eubwidNotation>
+      rdfs:range    <http://environment.data.gov.uk/def/bathing-water/eubwid> ;
+      api:label     "eubwidNotation" ;
+      api:structured  "true"^^xsd:boolean .
+
+time:inXSDDateTime
+      rdfs:range    xsd:dateTime ;
+      api:label     "inXSDDateTime" ;
+      api:structured  "true"^^xsd:boolean .
+
+owl:Class
+      rdf:type      rdfs:Class ;
+      api:label     "owl_Class" .
+
+<http://environment.data.gov.uk/def/bathing-water-quality/ComplianceBySamplingPointSlice>
+      rdf:type      rdfs:Class ;
+      api:label     "ComplianceBySamplingPointSlice" .
+
+<http://environment.data.gov.uk/def/bathing-water-profile/phytoplanktonStatement>
+      api:label     "phytoplanktonStatement" ;
+      api:multiValued  "true"^^xsd:boolean ;
+      api:structured  "true"^^xsd:boolean .
+
+<http://www.w3.org/ns/org#OrganizationalUnit>
+      rdf:type      rdfs:Class ;
+      api:label     "OrganizationalUnit" .
+
+skos:hasTopConcept
+      rdfs:range    rdfs:Resource ;
+      api:label     "hasTopConcept" ;
+      api:multiValued  "true"^^xsd:boolean .
+
+owl:imports
+      rdfs:range    rdfs:Resource ;
+      api:label     "imports" ;
+      api:multiValued  "true"^^xsd:boolean .
+
+<http://reference.data.gov.uk/def/intervals/Year>
+      rdf:type      rdfs:Class ;
+      api:label     "Year" .
+
+<http://environment.data.gov.uk/def/bathing-water-quality/entrovirusCount>
+      rdfs:range    xsd:integer ;
+      api:label     "entrovirusCount" .
+
+qb:componentProperty
+      rdfs:range    rdfs:Resource ;
+      api:label     "componentProperty" ;
+      api:multiValued  "true"^^xsd:boolean .
+
+<http://statistics.data.gov.uk/def/administrative-geography/Country>
+      rdf:type      rdfs:Class ;
+      api:label     "ons_Country" .
+
+<http://environment.data.gov.uk/def/bathing-water-quality/ComplianceByYearSlice>
+      rdf:type      rdfs:Class ;
+      api:label     "ComplianceByYearSlice" .
+
+<http://environment.data.gov.uk/def/bwq-som/followingAssessment>
+      rdfs:range    rdfs:Resource ;
+      api:label     "followingAssessment" .
+
+<http://reference.data.gov.uk/def/reference/URIset>
+      rdf:type      rdfs:Class ;
+      api:label     "URIset" .
+
+void:exampleResource
+      rdfs:range    rdfs:Resource ;
+      api:label     "exampleResource" ;
+      api:multiValued  "true"^^xsd:boolean .
+
+<http://data.ordnancesurvey.co.uk/ontology/place/Country>
+      rdf:type      rdfs:Class ;
+      api:label     "Country" .
+
+<http://purl.org/linked-data/api/vocab#definition>
+      rdfs:range    rdfs:Resource ;
+      api:label     "api_definition" .
+
+xsd:boolean
+      rdf:type      rdfs:Datatype ;
+      api:label     "boolean" .
+
+<http://environment.data.gov.uk/def/bathing-water-profile/BathingWaterProfile>
+      rdf:type      rdfs:Class ;
+      api:label     "BathingWaterProfile" .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/UnitaryAuthority>
+      rdf:type      rdfs:Class ;
+      api:label     "UnitaryAuthority" .
