@@ -21,71 +21,75 @@
 			</extension>
 		</extensions>
 
-		<plugins>
-		    <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>tomcat-maven-plugin</artifactId>
-                <configuration>
-                    <mode>both</mode>
-                    <path>/</path>
-                    <port>80</port>
-                </configuration>
-            </plugin>
-            
-            <plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat6-maven-plugin</artifactId>
-                <version>2.0</version>
-                <configuration>
-                    <port>80</port>
-                    <!-- <mode>both</mode> -->
-                    <path>/</path>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.mortbay.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>7.0.0.pre5</version>
-                <configuration>
-                    <connectors>
-<!--                        <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector"> -->
-                        <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
-                            <port>80</port>
-                        </connector>
-                    </connectors>
-                    <!-- Configure the webapp -->
-                    <!-- <webappconfig> -->
-                    <contextPath>/</contextPath>
-                    <!-- </webappconfig> -->
-                </configuration>
-            </plugin>
-        </plugins>
-        <pluginManagement>
-            <plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<configuration>
+						<source>1.6</source>
+						<target>1.6</target>
+					</configuration>
+				</plugin>
+
+<!-- 				<plugin> -->
+<!-- 					<groupId>org.codehaus.mojo</groupId> -->
+<!-- 					<artifactId>tomcat-maven-plugin</artifactId> -->
+<!-- 					<configuration> -->
+<!-- 						<mode>both</mode> -->
+<!-- 						<path>/</path> -->
+<!-- 						<port>80</port> -->
+<!-- 					</configuration> -->
+<!-- 				</plugin> -->
+
+				<plugin>
+					<groupId>org.apache.tomcat.maven</groupId>
+					<artifactId>tomcat6-maven-plugin</artifactId>
+					<version>2.1</version>
+					<configuration>
+						<port>80</port>
+						<!-- <mode>both</mode> -->
+						<path>/</path>
+					</configuration>
+				</plugin>
+
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
+                    <groupId>org.apache.tomcat.maven</groupId>
+                    <artifactId>tomcat7-maven-plugin</artifactId>
+                    <version>2.1</version>
                     <configuration>
-                        <source>1.6</source>
-                        <target>1.6</target>
+                        <port>80</port>
+                        <!-- <mode>both</mode> -->
+                        <path>/</path>
                     </configuration>
                 </plugin>
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>tomcat-maven-plugin</artifactId>
-                    <version>1.1</version>
-                    <configuration>
-                        <mode>both</mode>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
+
+				<plugin>
+					<groupId>org.mortbay.jetty</groupId>
+					<artifactId>jetty-maven-plugin</artifactId>
+					<version>7.0.0.pre5</version>
+					<configuration>
+						<connectors>
+							<!-- <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector"> -->
+							<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+								<port>80</port>
+							</connector>
+						</connectors>
+						<!-- Configure the webapp -->
+						<!-- <webappconfig> -->
+						<contextPath>/</contextPath>
+						<!-- </webappconfig> -->
+					</configuration>
+				</plugin>
+			</plugins>
+
+		</pluginManagement>
 
 	</build>
 
 	<dependencyManagement>
-		<dependencies>
-		</dependencies>
+		<dependencies />
+
 	</dependencyManagement>
 	<distributionManagement>
 		<repository>
@@ -160,32 +164,40 @@
 			</releases>
 		</repository>
 
-		<repository>
-			<id>maven2-repository.dev.java.net</id>
-			<name>Java.net Repository for Maven</name>
-			<url>http://download.java.net/maven/2/</url>
-			<layout>default</layout>
-		</repository>
+<!-- 		<repository> -->
+<!-- 			<id>maven2-repository.dev.java.net</id> -->
+<!-- 			<name>Java.net Repository for Maven</name> -->
+<!-- 			<url>http://download.java.net/maven/2/</url> -->
+<!-- 			<layout>default</layout> -->
+<!-- 		</repository> -->
 
-		<repository>
-			<id>codehaus-release-repo</id>
-			<name>Codehaus Release Repo</name>
-			<url>http://repository.codehaus.org</url>
-		</repository>
+<!-- 		<repository> -->
+<!-- 			<id>codehaus-release-repo</id> -->
+<!-- 			<name>Codehaus Release Repo</name> -->
+<!-- 			<url>http://repository.codehaus.org</url> -->
+<!-- 		</repository> -->
 
 	</repositories>
 
 	<pluginRepositories>
-		<pluginRepository>
-			<id>jetty</id>
-			<name>Mortbay Jetty Repo</name>
-			<url>http://jetty.mortbay.org</url>
-		</pluginRepository>
-		<pluginRepository>
-			<id>codehaus-release-repo</id>
-			<name>Codehaus Release Repo</name>
-			<url>http://repository.codehaus.org</url>
-		</pluginRepository>
+	     <pluginRepository>
+            <id>Maven-Central</id>
+            <name>Maven Central</name>
+            <url>http://repo1.maven.org/maven2/</url>
+        </pluginRepository>
+        
+<!-- 		<pluginRepository> -->
+<!-- 			<id>jetty</id> -->
+<!-- 			<name>Mortbay Jetty Repo</name> -->
+<!-- 			<url>http://jetty.mortbay.org</url> -->
+<!-- 		</pluginRepository> -->
+		
+<!-- 		<pluginRepository> -->
+<!-- 			<id>codehaus-release-repo</id> -->
+<!-- 			<name>Codehaus Release Repo</name> -->
+<!-- 			<url>http://repository.codehaus.org</url> -->
+<!-- 		</pluginRepository> -->
+
 	</pluginRepositories>
 
 </project>
