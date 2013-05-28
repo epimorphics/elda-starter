@@ -37,7 +37,7 @@
 					<artifactId>tomcat6-maven-plugin</artifactId>
 					<version>2.1</version>
 					<configuration>
-						<port>80</port>
+						<port>8080</port>
 						<!-- <mode>both</mode> -->
 						<path>/</path>
 					</configuration>
@@ -48,7 +48,7 @@
                     <artifactId>tomcat7-maven-plugin</artifactId>
                     <version>2.1</version>
                     <configuration>
-                        <port>80</port>
+                        <port>8080</port>
                         <!-- <mode>both</mode> -->
                         <path>/</path>
                     </configuration>
@@ -59,7 +59,7 @@
 					<artifactId>jetty-maven-plugin</artifactId>
 					<configuration>
 						<httpConnector>
-						    <port>80</port>
+						    <port>8080</port>
 						</httpConnector>
 						<webApp>
 						  <contextPath>/</contextPath>

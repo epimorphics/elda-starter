@@ -14,7 +14,7 @@ $(function() {
 			 targetHost != "elda.googlecode.com" &&
 			 targetHost != "code.google.com" &&
 			 targetHost != "www.axialis.com" ) {
-			 this.href = this.href.replace(this.href, "http://localhost/about?resource="+replacement);
+			 this.href = this.href.replace(this.href, "http://"+requestHost+"/about?resource="+replacement);
 		 }
 	});
 });
