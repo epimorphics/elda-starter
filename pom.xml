@@ -32,16 +32,6 @@
 					</configuration>
 				</plugin>
 
-<!-- 				<plugin> -->
-<!-- 					<groupId>org.codehaus.mojo</groupId> -->
-<!-- 					<artifactId>tomcat-maven-plugin</artifactId> -->
-<!-- 					<configuration> -->
-<!-- 						<mode>both</mode> -->
-<!-- 						<path>/</path> -->
-<!-- 						<port>80</port> -->
-<!-- 					</configuration> -->
-<!-- 				</plugin> -->
-
 				<plugin>
 					<groupId>org.apache.tomcat.maven</groupId>
 					<artifactId>tomcat6-maven-plugin</artifactId>
@@ -65,20 +55,15 @@
                 </plugin>
 
 				<plugin>
-					<groupId>org.mortbay.jetty</groupId>
+				    <groupId>org.eclipse.jetty</groupId>
 					<artifactId>jetty-maven-plugin</artifactId>
-					<version>7.0.0.pre5</version>
 					<configuration>
-						<connectors>
-							<!-- <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector"> -->
-							<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
-								<port>80</port>
-							</connector>
-						</connectors>
-						<!-- Configure the webapp -->
-						<!-- <webappconfig> -->
-						<contextPath>/</contextPath>
-						<!-- </webappconfig> -->
+						<httpConnector>
+						    <port>80</port>
+						</httpConnector>
+						<webApp>
+						  <contextPath>/</contextPath>
+						</webApp>
 					</configuration>
 				</plugin>
 			</plugins>
