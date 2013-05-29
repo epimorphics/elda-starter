@@ -12,55 +12,51 @@
 	<build>
 		<finalName>elda-starter</finalName>
 
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<configuration>
-						<source>1.6</source>
-						<target>1.6</target>
-					</configuration>
-				</plugin>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
 
-				<plugin>
-					<groupId>org.apache.tomcat.maven</groupId>
-					<artifactId>tomcat6-maven-plugin</artifactId>
-					<version>2.1</version>
-					<configuration>
-<!-- 						<port>8080</port> -->
-<!-- 						<mode>both</mode> -->
-						<path>/</path>
-					</configuration>
-				</plugin>
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat6-maven-plugin</artifactId>
+				<version>2.1</version>
+				<configuration>
+					<!-- <port>8080</port> -->
+					<!-- <mode>both</mode> -->
+					<path>/</path>
+				</configuration>
+			</plugin>
 
-                <plugin>
-                    <groupId>org.apache.tomcat.maven</groupId>
-                    <artifactId>tomcat7-maven-plugin</artifactId>
-                    <version>2.1</version>
-                    <configuration>
-<!--                         <port>8080</port> -->
-<!--                         <mode>both</mode> -->
-                        <path>/</path>
-                    </configuration>
-                </plugin>
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.1</version>
+				<configuration>
+					<!-- <port>8080</port> -->
+					<!-- <mode>both</mode> -->
+					<path>/</path>
+				</configuration>
+			</plugin>
 
-				<plugin>
-				    <groupId>org.eclipse.jetty</groupId>
-					<artifactId>jetty-maven-plugin</artifactId>
-					<configuration>
-						<httpConnector>
-						    <port>8080</port>
-						</httpConnector>
-						<webApp>
-						  <contextPath>/</contextPath>
-						</webApp>
-					</configuration>
-				</plugin>
-			</plugins>
-
-		</pluginManagement>
-
+			<plugin>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<configuration>
+					<httpConnector>
+						<port>8080</port>
+					</httpConnector>
+					<webApp>
+						<contextPath>/</contextPath>
+					</webApp>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
 
 	<dependencyManagement>
@@ -135,39 +131,39 @@
 			</releases>
 		</repository>
 
-<!-- 		<repository> -->
-<!-- 			<id>maven2-repository.dev.java.net</id> -->
-<!-- 			<name>Java.net Repository for Maven</name> -->
-<!-- 			<url>http://download.java.net/maven/2/</url> -->
-<!-- 			<layout>default</layout> -->
-<!-- 		</repository> -->
+		<!-- <repository> -->
+		<!-- <id>maven2-repository.dev.java.net</id> -->
+		<!-- <name>Java.net Repository for Maven</name> -->
+		<!-- <url>http://download.java.net/maven/2/</url> -->
+		<!-- <layout>default</layout> -->
+		<!-- </repository> -->
 
-<!-- 		<repository> -->
-<!-- 			<id>codehaus-release-repo</id> -->
-<!-- 			<name>Codehaus Release Repo</name> -->
-<!-- 			<url>http://repository.codehaus.org</url> -->
-<!-- 		</repository> -->
+		<!-- <repository> -->
+		<!-- <id>codehaus-release-repo</id> -->
+		<!-- <name>Codehaus Release Repo</name> -->
+		<!-- <url>http://repository.codehaus.org</url> -->
+		<!-- </repository> -->
 
 	</repositories>
 
 	<pluginRepositories>
-	     <pluginRepository>
-            <id>Maven-Central</id>
-            <name>Maven Central</name>
-            <url>http://repo1.maven.org/maven2/</url>
-        </pluginRepository>
-        
-<!-- 		<pluginRepository> -->
-<!-- 			<id>jetty</id> -->
-<!-- 			<name>Mortbay Jetty Repo</name> -->
-<!-- 			<url>http://jetty.mortbay.org</url> -->
-<!-- 		</pluginRepository> -->
-		
-<!-- 		<pluginRepository> -->
-<!-- 			<id>codehaus-release-repo</id> -->
-<!-- 			<name>Codehaus Release Repo</name> -->
-<!-- 			<url>http://repository.codehaus.org</url> -->
-<!-- 		</pluginRepository> -->
+		<pluginRepository>
+			<id>Maven-Central</id>
+			<name>Maven Central</name>
+			<url>http://repo1.maven.org/maven2/</url>
+		</pluginRepository>
+
+		<!-- <pluginRepository> -->
+		<!-- <id>jetty</id> -->
+		<!-- <name>Mortbay Jetty Repo</name> -->
+		<!-- <url>http://jetty.mortbay.org</url> -->
+		<!-- </pluginRepository> -->
+
+		<!-- <pluginRepository> -->
+		<!-- <id>codehaus-release-repo</id> -->
+		<!-- <name>Codehaus Release Repo</name> -->
+		<!-- <url>http://repository.codehaus.org</url> -->
+		<!-- </pluginRepository> -->
 
 	</pluginRepositories>
 
