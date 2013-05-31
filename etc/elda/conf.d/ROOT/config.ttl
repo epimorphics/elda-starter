@@ -30,6 +30,9 @@ spec:api   a       api:API;
 #        api:sparqlEndpoint  <http://localhost:3030/store/query>;
         api:maxPageSize     100;
         api:defaultPageSize 10;
+        api:formatter       
+                            spec:CsvFormatter,
+                            spec:HtmlFormatter;
         api:defaultFormatter
                             spec:HtmlFormatter;
         .
@@ -124,6 +127,14 @@ spec:HtmlFormatter
             api:mimeType            "text/html;charset=UTF-8";
             elda:metadataOptions    "bindings,versions,execution,formats";
             api:stylesheet          "lda-assets/xslt/staging.xsl";
+            .
+
+spec:CsvFormatter
+            a                       api:XsltFormatter ;
+            api:name                "csv" ;
+            api:mimeType            "text/csv;charset=UTF-8";
+            elda:metadataOptions    "bindings,versions,execution,formats";
+            api:stylesheet          "lda-assets/xslt/csv.xsl";
             .
 
 ###############################################################################

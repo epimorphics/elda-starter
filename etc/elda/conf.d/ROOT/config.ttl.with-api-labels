@@ -30,6 +30,9 @@ spec:api   a       api:API;
 #        api:sparqlEndpoint  <http://localhost:3030/store/query>;
         api:maxPageSize     100;
         api:defaultPageSize 10;
+        api:formatter       
+                            spec:CsvFormatter,
+                            spec:HtmlFormatter;
         api:defaultFormatter
                             spec:HtmlFormatter;
         .
@@ -126,6 +129,14 @@ spec:HtmlFormatter
             api:stylesheet          "lda-assets/xslt/staging.xsl";
             .
 
+spec:CsvFormatter
+            a                       api:XsltFormatter ;
+            api:name                "csv" ;
+            api:mimeType            "text/csv;charset=UTF-8";
+            elda:metadataOptions    "bindings,versions,execution,formats";
+            api:stylesheet          "lda-assets/xslt/csv.xsl";
+            .
+
 ###############################################################################
 #
 # Elda required variable settings for html formatter operation.
@@ -138,19 +149,19 @@ spec:HtmlFormatter
 ###############################################################################
 # SPARQL Query generated shortname mappings
 ###############################################################################
-#@prefix dc:      <http://purl.org/dc/elements/1.1/> .
+@prefix dc:      <http://purl.org/dc/elements/1.1/> .
 @prefix foaf:    <http://xmlns.com/foaf/0.1/> .
 @prefix void:    <http://rdfs.org/ns/void#> .
 @prefix qb:      <http://purl.org/linked-data/cube#> .
-#@prefix qudt:    <http://qudt.org/schema/qudt#> .
-#@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix qudt:    <http://qudt.org/schema/qudt#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix time:    <http://www.w3.org/2006/time#> .
-#@prefix dct:     <http://purl.org/dc/terms/> .
-#@prefix owl:     <http://www.w3.org/2002/07/owl#> .
-#@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
-#@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-#@prefix api:     <http://purl.org/linked-data/api/vocab/> .
-#@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix dct:     <http://purl.org/dc/terms/> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix api:     <http://purl.org/linked-data/api/vocab#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
 
 <http://reference.data.gov.uk/def/reference/itemType>
       rdfs:range    rdfs:Resource ;
