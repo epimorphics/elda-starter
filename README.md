@@ -153,13 +153,13 @@ configuration contains the following shortname declarations.
                 .
                 
 Notice that property ranges are also given. This is necessary so that elda can determine right kind of SPARQL
-expression to construct in the case of an `&P=V` filter expression being given as a URL parameter such as:
+expression to construct in the case of an `&{P}={V}` filter expression being given as a URL parameter such as:
 
     type={class-url}
     
-in one of the exploratory URI given above. The `P` in `P=V` can actually be a path madeup of shortnames radiating 
-out along RDF property arcs away from the item of interest `{p1}.{p2}.{p3}=V` where `{p1}`-`{p3}` are substituted
-with actual property shortnames. 
+in one of the exploratory URI given above. The `{P}` in `{P}={V}` can actually be a chain of property shortnames
+radiating out along RDF property arcs away from the item of interest `{p1}.{p2}.{p3}=V` where `{p1}`-`{p3}` are 
+substituted with actual property shortnames. 
 
 Property shortnames can also be used to enhance the view of the data being presented. Adding the following URL parameter
 
