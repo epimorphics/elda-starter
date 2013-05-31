@@ -51,13 +51,13 @@ which configure the SPARQL endpoint accessed by elda. Toggle the `#` comment in 
         #   api:sparqlEndpoint  <http://environment.data.gov.uk/sparql/bwq/query>;
             api:sparqlEndpoint  <http://localhost:3030/store/query>;
 
-You are now set up to use a local [https://jena.apache.org/documentation/serving_data/](Fueski "Apache Jena Fuseki Page")
+You are now set up to use a local [Fueski](https://jena.apache.org/documentation/serving_data/ "Apache Jena Fuseki Page")
 which you can start up as follows:
 
     cd <fuseki-installation-directory>
     java -Xmx1024 -jar fuseki-server.jar --loc=<path-to-tdb-dataset-directory> /store
     
-This assumes that you have loaded the data that you want to serve into a [http://jena.apache.org/documentation/tdb/](Jena TDB) store.
+This assumes that you have loaded the data that you want to serve into a [Jena](http://jena.apache.org/documentation/tdb/ "Jena TDB") store.
 If you've not already done this, the `fuseki-server.jar` file contains a complete installation of Jena and can serve as a bit of a 
 'swiss-army knife' with respect to jena command-line utilities.
 
