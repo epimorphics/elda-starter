@@ -4,10 +4,8 @@
         "http://www.tuckey.org/res/dtds/urlrewrite3.2.dtd">
 
 <urlrewrite use-query-string="true">
-
     <rule>
         <from>(^/$)</from>
         <to last="true" type="forward">/index.html</to>
-    </rule>
-    
+    </rule>  
 </urlrewrite>

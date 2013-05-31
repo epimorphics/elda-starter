@@ -16,6 +16,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
 				<configuration>
 					<source>1.6</source>
 					<target>1.6</target>
@@ -47,10 +48,11 @@
 			<plugin>
 				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
+				<version>9.0.3.v20130506</version>
 				<configuration>
-					<httpConnector>
-						<port>8080</port>
-					</httpConnector>
+<!-- 					<httpConnector> -->
+<!-- 						<port>8080</port> -->
+<!-- 					</httpConnector> -->
 					<webApp>
 						<contextPath>/</contextPath>
 					</webApp>
@@ -58,11 +60,7 @@
 			</plugin>
 		</plugins>
 	</build>
-
-	<dependencyManagement>
-		<dependencies />
-
-	</dependencyManagement>
+	
 	<distributionManagement>
 		<repository>
 			<id>ftp-repo-epi</id>
