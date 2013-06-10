@@ -20,25 +20,25 @@
 	
   <!-- ==================================================================== -->
  
-<!--     <filter> -->
-<!--         <filter-name>Jersey Web Application</filter-name> -->
-<!--         <filter-class>com.sun.jersey.spi.container.servlet.ServletContainer</filter-class> -->
+    <filter>
+        <filter-name>Jersey Web Application</filter-name>
+        <filter-class>com.sun.jersey.spi.container.servlet.ServletContainer</filter-class>
     
-<!--         <init-param> -->
-<!--           <param-name>com.sun.jersey.config.property.packages</param-name> -->
-<!--           <param-value>com.epimorphics.lda.restlets</param-value> -->
-<!--         </init-param> -->
+        <init-param>
+          <param-name>com.sun.jersey.config.property.packages</param-name>
+          <param-value>com.epimorphics.lda.restlets</param-value>
+        </init-param>
         
-<!--         <init-param> -->
-<!--           <param-name>com.sun.jersey.config.feature.FilterForwardOn404</param-name> -->
-<!--           <param-value>true</param-value> -->
-<!--         </init-param> -->
+        <init-param>
+          <param-name>com.sun.jersey.config.feature.FilterForwardOn404</param-name>
+          <param-value>true</param-value>
+        </init-param>
         
-<!--         <init-param> -->
-<!--              <param-name>com.sun.jersey.spi.container.ContainerRequestFilters</param-name> -->
-<!--              <param-value>com.sun.jersey.api.container.filter.PostReplaceFilter</param-value> -->
-<!--          </init-param> -->
-<!--     </filter> -->
+        <init-param>
+             <param-name>com.sun.jersey.spi.container.ContainerRequestFilters</param-name>
+             <param-value>com.sun.jersey.api.container.filter.PostReplaceFilter</param-value>
+         </init-param>
+    </filter>
     
   <!-- ==================================================================== -->
      <filter-mapping>
@@ -46,10 +46,10 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
  
-<!--     <filter-mapping> -->
-<!--         <filter-name>Jersey Web Application</filter-name> -->
-<!--         <url-pattern>/*</url-pattern> -->
-<!--     </filter-mapping> -->
+    <filter-mapping>
+        <filter-name>Jersey Web Application</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
     
 
   <!-- ==================================================================== -->
@@ -60,14 +60,14 @@
 
   <!-- ==================================================================== -->
  
-	<servlet>
-		<servlet-name>jersey-for-elda</servlet-name>
-		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+<!-- 	<servlet> -->
+<!-- 		<servlet-name>jersey-for-elda</servlet-name> -->
+<!-- 		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class> -->
 
-		<init-param>
-			<param-name>com.sun.jersey.config.property.packages</param-name>
-			<param-value>com.epimorphics.lda.restlets</param-value>
-		</init-param>
+<!-- 		<init-param> -->
+<!-- 			<param-name>com.sun.jersey.config.property.packages</param-name> -->
+<!-- 			<param-value>com.epimorphics.lda.restlets</param-value> -->
+<!-- 		</init-param> -->
 
 <!-- 		<init-param> -->
 <!-- 			<param-name>com.epimorphics.api.initialSpecFile</param-name> -->
@@ -75,7 +75,7 @@
 <!-- 				/etc/elda/conf.d/{APP}/*.ttl -->
 <!-- 			</param-value> -->
 <!-- 		</init-param> -->
-	</servlet>
+<!-- 	</servlet> -->
 
 	<servlet>
 		<servlet-name>force-log4j</servlet-name>
@@ -85,20 +85,20 @@
 
  	<!-- ==================================================================== -->
 
-	<servlet-mapping>
-		<servlet-name>default</servlet-name>
-		<url-pattern>/index.html</url-pattern>
-	</servlet-mapping>
+<!-- 	<servlet-mapping> -->
+<!-- 		<servlet-name>default</servlet-name> -->
+<!-- 		<url-pattern>/index.html</url-pattern> -->
+<!-- 	</servlet-mapping> -->
 
-	<servlet-mapping>
-		<servlet-name>default</servlet-name>
-		<url-pattern>/lda-assets/*</url-pattern>
-	</servlet-mapping>
+<!-- 	<servlet-mapping> -->
+<!-- 		<servlet-name>default</servlet-name> -->
+<!-- 		<url-pattern>/lda-assets/*</url-pattern> -->
+<!-- 	</servlet-mapping> -->
 
-   <servlet-mapping>
-       <servlet-name>jersey-for-elda</servlet-name>
-       <url-pattern>/*</url-pattern>
-   </servlet-mapping>
+<!--    <servlet-mapping> -->
+<!--        <servlet-name>jersey-for-elda</servlet-name> -->
+<!--        <url-pattern>/*</url-pattern> -->
+<!--    </servlet-mapping> -->
 
 	<!-- ==================================================================== -->
 

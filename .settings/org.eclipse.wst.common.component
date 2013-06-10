@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
     <wb-module deploy-name="bwqShell">
         <wb-resource deploy-path="/" source-path="/src/main/webapp"/>
+        <dependent-module archiveName="elda-lda.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/elda-lda/elda-lda">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="java-output-path"/>
         <property name="context-root" value="/"/>
     </wb-module>

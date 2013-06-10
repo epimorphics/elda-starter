@@ -5,6 +5,7 @@
 	<projects>
 		<project>json-rdf</project>
 		<project>lda</project>
+		<project>elda-lda</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
