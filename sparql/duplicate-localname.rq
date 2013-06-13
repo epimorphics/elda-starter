@@ -1,13 +1,13 @@
 SELECT ?t1 ?t2 ?ln1 WHERE 
 { 
   # Pick over properties and item types.
-  { SELECT DISTINCT ?t1 
-    WHERE { {  [] ?t1 [] } UNION  { [] a ?t1 . FILTER (!isBlank(?t1)) } }
+  { SELECT ?t1 
+    WHERE { {  [] ?t1 [] } UNION  { [] a ?t1 . FILTER (!isBlank(?t1)) } } GROUP BY ?t1
   }
      
   # and again.
-  { SELECT DISTINCT ?t2 
-    WHERE { {  [] ?t2 [] } UNION  { [] a ?t2 . FILTER (!isBlank(?t2)) } }
+  { SELECT ?t2 
+    WHERE { {  [] ?t2 [] } UNION  { [] a ?t2 . FILTER (!isBlank(?t2)) } } GROUP BY ?t2
   }
      
   # Make sure they are different (< halves number of comparisons O(n^2))
@@ -19,4 +19,4 @@ SELECT ?t1 ?t2 ?ln1 WHERE
 
   # Report only duplicates.
   FILTER (?ln1 = ?ln2)
-}
+} ORDER BY ?t1 ?t2

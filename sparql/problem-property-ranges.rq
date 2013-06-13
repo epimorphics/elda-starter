@@ -13,7 +13,7 @@ PREFIX time:              <http://www.w3.org/2006/time#>
 PREFIX void:              <http://rdfs.org/ns/void#>
 PREFIX xsd:               <http://www.w3.org/2001/XMLSchema#>
 
-SELECT ?p ?r1 ?r2
+SELECT DISTINCT ?p ?r1 ?r2
 WHERE
 {
   # Pick a property and a random value. 
@@ -24,15 +24,12 @@ WHERE
   } 
 
   # Get the property values' type (Resource or datatype).
-  BIND (IF(!isLiteral(?v), rdfs:Resource, IF(datatype(?v)!=rdf:langString && datatype(?v)!=xsd:string, datatype(?v), ?undef)) as ?r1)
-  
-  #
+  BIND (IF(!isLiteral(?v), rdfs:Resource, IF(datatype(?v)=rdf:langString || datatype(?v)=xsd:string,xsd:stringOrLangString, datatype(?v))) as ?r1)
+
   # Check whether there's another value for this property of a different type.
   # [Multiple literal datatypes in the range of properties are 'hard' to handle in LDA]
-  #
-  FILTER EXISTS {
-     [] ?p ?v2
-     BIND (IF(!isLiteral(?v2), rdfs:Resource, IF(datatype(?v2)!=rdf:langString && datatype(?v2)!=xsd:string, datatype(?v2), ?undef)) as ?r2)
-     FILTER (?r2 != ?r1)
-  }
-} 
+
+  [] ?p ?v2
+  BIND (IF(!isLiteral(?v2), rdfs:Resource, IF(datatype(?v2)=rdf:langString || datatype(?v2)=xsd:string, xsd:stringOrLangString, datatype(?v2))) as ?r2)
+  FILTER (STR(?r1) < STR(?r2))
+} ORDER BY ?p ?r1 ?r2
