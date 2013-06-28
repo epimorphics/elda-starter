@@ -1,4 +1,4 @@
-## Common prefixes.
+### Common prefixes.
 @prefix dc:      <http://purl.org/dc/elements/1.1/> .
 @prefix dct:     <http://purl.org/dc/terms/> .
 @prefix owl:     <http://www.w3.org/2002/07/owl#> .
@@ -15,6 +15,7 @@
 
 <http://environment.data.gov.uk/sparql/bwq/query> elda:supportsNestedSelect true . 
 <http://localhost:3030/store/query> elda:supportsNestedSelect true .  
+<http://localhost:2020/sparql> elda:supportsNestedSelect true .  
 
 ###############################################################################
 #
@@ -28,9 +29,11 @@ spec:api   a       api:API;
         rdfs:label          "A demo API configuration"@en;      
         api:sparqlEndpoint  <http://environment.data.gov.uk/sparql/bwq/query>;
 #        api:sparqlEndpoint  <http://localhost:3030/store/query>;
+#        api:sparqlEndpoint  <http://localhost:2020/sparql>;
         api:maxPageSize     100;
         api:defaultPageSize 10;
         api:formatter       
+#                           spec:XmlFormatter,
                             spec:CsvFormatter,
                             spec:HtmlFormatter;
         api:defaultFormatter
@@ -50,6 +53,7 @@ spec:anything
         api:selector        [
             api:where       
 """   ?item    a    [] .
+   FILTER (!isBlank(?item))
 """;
         ]; 
         api:viewer          api:basicViewer, api:describeViewer, api:labelledDescribeViewer;
@@ -70,7 +74,7 @@ spec:about
         api:viewer          api:basicViewer, api:describeViewer, api:labelledDescribeViewer;
         api:defaultViewer   api:describeViewer;
         .
-
+        
 ##############################################################################
 #
 # List things related to a 'mentions' as an example of a ListEndpoint.
@@ -87,7 +91,7 @@ spec:mentions
             api:type        rdfs:Resource;  #a resource not a simple literal
         ];
         api:selector [
-            api:where       "?item ?p ?uri .";
+            api:where       "?item ?p ?uri . FILTER (!isBlank(?item))";
         ];
         api:viewer          api:basicViewer, api:describeViewer, api:labelledDescribeViewer;
         api:defaultViewer   api:describeViewer;
@@ -127,6 +131,8 @@ spec:HtmlFormatter
             api:mimeType            "text/html;charset=UTF-8";
             elda:metadataOptions    "bindings,versions,execution,formats";
             api:stylesheet          "lda-assets/xslt/staging.xsl";
+#           elda:shortnameMode      elda:roundTrip ;
+            
             .
 
 spec:CsvFormatter
@@ -135,7 +141,15 @@ spec:CsvFormatter
             api:mimeType            "text/csv;charset=UTF-8";
             elda:metadataOptions    "bindings,versions,execution,formats";
             api:stylesheet          "lda-assets/xslt/csv.xsl";
+#           elda:shortnameMode      elda:preferLocal ;
             .
+            
+#spec:XmlFormatter
+#           a                       api:XmlFormatter    ; 
+#           api:name                "xml"   ; 
+#           api:mimeType            "application/xml; charset=utf-8" ; 
+#           elda:shortnameMode      elda:preferLocal ;
+#           .
 
 ###############################################################################
 #
@@ -145,23 +159,23 @@ spec:CsvFormatter
  spec:api  api:variable        [ api:name "_resourceRoot"; api:value "/lda-assets/" ];
         api:variable           [ api:name "_strip_has"; api:value "yes" ];
         .
-		
+        
 ###############################################################################
 # SPARQL Query generated shortname mappings
 ###############################################################################
-@prefix dc:      <http://purl.org/dc/elements/1.1/> .
+#@prefix dc:      <http://purl.org/dc/elements/1.1/> .
 @prefix foaf:    <http://xmlns.com/foaf/0.1/> .
 @prefix void:    <http://rdfs.org/ns/void#> .
 @prefix qb:      <http://purl.org/linked-data/cube#> .
-@prefix qudt:    <http://qudt.org/schema/qudt#> .
-@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+#@prefix qudt:    <http://qudt.org/schema/qudt#> .
+#@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix time:    <http://www.w3.org/2006/time#> .
-@prefix dct:     <http://purl.org/dc/terms/> .
-@prefix owl:     <http://www.w3.org/2002/07/owl#> .
-@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
-@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix api:     <http://purl.org/linked-data/api/vocab#> .
-@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+#@prefix dct:     <http://purl.org/dc/terms/> .
+#@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+#@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+#@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+#@prefix api:     <http://purl.org/linked-data/api/vocab/> .
+#@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
 
 <http://reference.data.gov.uk/def/reference/itemType>
       rdfs:range    rdfs:Resource ;
