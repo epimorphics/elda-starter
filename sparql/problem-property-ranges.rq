@@ -31,5 +31,5 @@ WHERE
 
   [] ?p ?v2
   BIND (IF(!isLiteral(?v2), rdfs:Resource, IF(datatype(?v2)=rdf:langString || datatype(?v2)=xsd:string, xsd:stringOrLangString, datatype(?v2))) as ?r2)
-  FILTER (STR(?r1) < STR(?r2))
+  FILTER (STR(?r1) != STR(?r2))
 } ORDER BY ?p ?r1 ?r2
