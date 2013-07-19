@@ -54,9 +54,9 @@
 
   <!-- ==================================================================== -->
   
-<!--   <listener> -->
-<!--     <listener-class>com.epimorphics.lda.restlets.RouterRestlet$Init</listener-class> -->
-<!--   </listener> -->
+  <listener>
+    <listener-class>com.epimorphics.lda.restlets.RouterRestlet$Init</listener-class>
+  </listener>
 
   <!-- ==================================================================== -->
  
@@ -77,11 +77,6 @@
 <!-- 		</init-param> -->
 	</servlet>
 
-	<servlet>
-		<servlet-name>force-log4j</servlet-name>
-		<servlet-class>com.epimorphics.lda.restlets.ForceLog4JAndAnnounceElda</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
 
  	<!-- ==================================================================== -->
 
