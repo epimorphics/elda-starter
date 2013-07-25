@@ -72,7 +72,7 @@
 		<dependency>
 			<groupId>com.epimorphics.lda</groupId>
 			<artifactId>elda-lda</artifactId>
-			<version>1.2.23</version>
+			<version>1.2.24</version>
 		</dependency>
 
 		<dependency>
@@ -90,7 +90,12 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
-		
+
+    	<dependency>
+    		<groupId>com.sun.jersey</groupId>
+    		<artifactId>jersey-servlet</artifactId>
+    		<version>1.17</version>
+    	</dependency>
 	</dependencies>
 
 	<repositories>
