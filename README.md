@@ -63,7 +63,7 @@ If you've not already done this, the `fuseki-server.jar` file contains a complet
 
     java -cp fuseki-server.jar tdb.tdbloader --loc=<path-to-tdb-dataset-directory> [rdf-files-to-load]
 
-Other jena command-lines tooks that you might find useful are:
+Other jena command-lines tools that you might find useful are:
 
     java cp fuseki-server.jar tdb.tdbquery --loc=<path-to-tdb-dataset-directory> --query=<sparql-query-file>
 
@@ -111,7 +111,7 @@ You might also try the non-html format links to the top right of the displayed p
     http://localhost:8080/anything.csv
     http://localhost:8080/anything.html
     
-Note that all of the output formatters except those for `csv` and `html` for ar  builtin. The `csv` and `html` 
+Note that all of the output formatters except those for `csv` and `html` for are builtin. The `csv` and `html` 
 formatter are derived from the `xml` format through the use of `xslt` transforms that are defined in the 
 sample configuration file.
 
