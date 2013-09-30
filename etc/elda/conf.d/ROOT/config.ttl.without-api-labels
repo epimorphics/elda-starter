@@ -27,9 +27,9 @@ spec:api   a       api:API;
         api:base "/";
         rdfs:comment        "A demo API configuration"@en;
         rdfs:label          "A demo API configuration"@en;      
-#        api:sparqlEndpoint  <http://environment.data.gov.uk/sparql/bwq/query>;
+        api:sparqlEndpoint  <http://environment.data.gov.uk/sparql/bwq/query>;
 #        api:sparqlEndpoint  <http://localhost:3030/store/query>;
-        api:sparqlEndpoint  <http://localhost:2020/sparql>;
+#        api:sparqlEndpoint  <http://localhost:2020/sparql>;
         api:maxPageSize     100;
         api:defaultPageSize 10;
         api:formatter       
@@ -160,6 +160,3 @@ spec:CsvFormatter
         api:variable           [ api:name "_strip_has"; api:value "yes" ];
         .
         
-###############################################################################
-# SPARQL Query generated shortname mappings
-###############################################################################
