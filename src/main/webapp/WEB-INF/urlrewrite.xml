@@ -6,6 +6,6 @@
 <urlrewrite use-query-string="true">
     <rule>
         <from>(^/$)</from>
-        <to last="true" type="forward">/index.html</to>
-    </rule>  
+        <to last="true" type="redirect">./index.html</to>
+    </rule>
 </urlrewrite>

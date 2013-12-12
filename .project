@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>ea2-lda-combined</name>
+	<name>elda-starter</name>
 	<comment></comment>
 	<projects>
 		<project>json-rdf</project>
@@ -52,5 +52,6 @@
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 		<nature>org.eclipse.mylyn.wikitext.ui.wikiTextNature</nature>
 		<nature>org.eclipse.xtext.ui.shared.xtextNature</nature>
+		<nature>com.sysdeo.eclipse.tomcat.tomcatnature</nature>
 	</natures>
 </projectDescription>
