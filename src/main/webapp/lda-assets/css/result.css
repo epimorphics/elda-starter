@@ -20,7 +20,7 @@ body {
 }
 
 nav.site {
-	background: url(../images/elda-banner.png) no-repeat 0% 0%;
+	background: url(../images/hmg-banner.png) no-repeat 0% 0%;
 	padding-top: 54px;
 }
 
@@ -226,7 +226,7 @@ nav.topnav section.sort li, nav.topnav section.view ul.properties li {
 	white-space: normal;
 }
 
-nav.topnav section.sort li.selected, nav.topnav section.view ul.properties li.selected {
+.resultcount, nav.topnav section.sort li.selected, nav.topnav section.view ul.properties li.selected {
 	font-weight: bold;
 }
 
