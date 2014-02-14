@@ -72,7 +72,7 @@
 		<dependency>
 			<groupId>com.epimorphics.lda</groupId>
 			<artifactId>elda-lda</artifactId>
-			<version>1.2.29-SNAPSHOT</version>
+			<version>1.2.29</version>
 		</dependency>
 
 		<dependency>
