@@ -2070,6 +2070,18 @@ $prefLabel, $altLabel, $title and $name variables.
 			</xsl:if>
             <col class="filterWidth" />
 		</colgroup>
+        <!--  try a dummy 'empty' row to make the table valid - starting in all columns -->
+        <tr>
+            <xsl:if test="$properties != ''">
+                <td/>
+		</xsl:if>
+                <td/>
+                <td/>
+            <xsl:if test="$showMap = 'true'">
+                <td/>
+            </xsl:if>
+            <td/>       
+        </tr>		
 		</xsl:if>
 		<!-- This for-each is a hack around what seems to be a bug in older versions
 			of libxslt, which ignores ordering in an xsl:apply-templates -->
@@ -2732,6 +2744,7 @@ $prefLabel, $altLabel, $title and $name variables.
 				</xsl:attribute>
 				<img src="{$inactiveImageBase}/Search.png" alt="more like this" />
 			</a>
+			</xsl:if>
 		</xsl:otherwise>
 	</xsl:choose>
 </xsl:template>
