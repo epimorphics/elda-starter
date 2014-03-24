@@ -978,7 +978,7 @@ $prefLabel, $altLabel, $title and $name variables.
 </xsl:template>
 
 <xsl:template match="result" mode="summary">
-    <xsl:if test="count(items/item) > 1">
+    <xsl:if test="count(items/item) > 1 or totalResults">
         <section class="summary">
             <h1>On This Page</h1>
             <xsl:call-template name="createInfo">
