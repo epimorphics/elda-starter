@@ -10,9 +10,11 @@ $(function() {
 	
 	$("a[href]").each ( function (a) {
 		 var replacement = /.*[?&=#].*/.test(this.href) ? encodeURIComponent(this.href) : encodeURI(this.href);
-		 var targetHost = this.href.match(hostPattern)[1];
+		 var targetHost = this.href.match(hostPattern);
+		 targetHost = targetHost!=null ? targetHost[1] : null ;
 		 //Rewrite off page references.
-		 if( targetHost != requestHost &&
+		 if( targetHost !=null &&
+		     targetHost != requestHost &&
 			 targetHost != "elda.googlecode.com" &&
 			 targetHost != "code.google.com" &&
 			 targetHost != "www.axialis.com" ) {
