@@ -2688,7 +2688,7 @@ $prefLabel, $altLabel, $title and $name variables.
 					</a>
 				</xsl:otherwise>
 			</xsl:choose>
-			<xsl:if test="string-length($value) &lt; 1000" >
+			<xsl:if test="string-length($value) &lt; 200" >
 			<a rel="nofollow" title="more like this">
 				<xsl:attribute name="href">
 					<xsl:call-template name="substituteParam">
@@ -2741,7 +2741,7 @@ $prefLabel, $altLabel, $title and $name variables.
 			</xsl:choose>
 		</xsl:when>
 		<xsl:otherwise>
-		    <xsl:if test="string-length($label) &lt; 1000" >
+		    <xsl:if test="string-length($label) &lt; 200" >
 			<a rel="nofollow" title="more like this">
 				<xsl:attribute name="href">
 					<xsl:call-template name="substituteParam">

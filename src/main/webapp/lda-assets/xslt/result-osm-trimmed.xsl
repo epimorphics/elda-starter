@@ -2718,7 +2718,7 @@ $prefLabel, $altLabel, $title and $name variables.
                     </a>
                 </xsl:otherwise>
             </xsl:choose>
-            <xsl:if test="string-length($value) &lt; 1000" >
+            <xsl:if test="string-length($value) &lt; 200" >
             <a rel="nofollow" title="more like this">
                 <xsl:attribute name="href">
                     <xsl:call-template name="substituteParam">
@@ -2733,7 +2733,7 @@ $prefLabel, $altLabel, $title and $name variables.
                         </xsl:with-param>
                     </xsl:call-template>
                 </xsl:attribute>
-                <img src="{$inactiveImageBase}/Search.png" alt="more like this" />
+                <img src="{$inactiveImageBase}/Search.png" alt="ke this" />
             </a>
             </xsl:if>
             <xsl:choose>
@@ -2775,7 +2775,7 @@ $prefLabel, $altLabel, $title and $name variables.
             </xsl:choose>
         </xsl:when>
         <xsl:otherwise>
-            <xsl:if test="string-length($label) &lt; 1000" >
+            <xsl:if test="string-length($label) &lt; 200" >
             <a rel="nofollow" title="more like this">
                 <xsl:attribute name="href">
                     <xsl:call-template name="substituteParam">
