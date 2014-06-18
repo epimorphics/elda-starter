@@ -74,22 +74,33 @@
 			<artifactId>elda-lda</artifactId>
 			<version>1.2.34-SNAPSHOT</version>
 		</dependency>
-
-		<dependency>
-			<groupId>xalan</groupId>
-			<artifactId>xalan</artifactId>
-			<version>2.7.1</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
-		
-    	<dependency>
-			<groupId>xml-apis</groupId>
-			<artifactId>xml-apis</artifactId>
-			<version>1.4.01</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
+        <!-- 
+        <dependency>
+            <groupId>xalan</groupId>
+            <artifactId>xalan</artifactId>
+            <version>2.7.1</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>xml-apis</groupId>
+            <artifactId>xml-apis</artifactId>
+            <version>1.4.01</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+        -->
+        <dependency>
+            <groupId>net.sf.saxon</groupId>
+            <artifactId>Saxon-HE</artifactId>
+            <version>9.5.1-5</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sourceforge.saxon</groupId>
+            <artifactId>saxon</artifactId>
+            <version>9.1.0.8</version>
+            <classifier>s9api</classifier>
+        </dependency>
 
     	<dependency>
     		<groupId>com.sun.jersey</groupId>
