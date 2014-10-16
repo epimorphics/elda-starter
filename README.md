@@ -3,6 +3,17 @@ elda-starter
 
 Sample Elda Starter project to be 'forked' and customised as required.
 
+Prerequistes
+------------
+To follow the steps below you will install a recent version of:
+
+- [Apache Maven](http://maven.apache.org/download.cgi)
+- [Git ](http://git-scm.com/downloads)
+
+for your platform.
+
+The instructions below are written assuming a Linux operating enviroment and will need to be adapted slightly for other environments.
+
 Getting Started
 ---------------
 To get started with this project:
