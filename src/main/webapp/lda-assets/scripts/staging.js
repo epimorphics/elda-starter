@@ -9,8 +9,8 @@ $(function() {
     var requestScheme = url.match(schemePattern)[1];
     
     $("a[href]").each ( function (a) {
-         var replacement = /.*[?&=#].*/.test(this.href) ? encodeURIComponent(this.href) : encodeURI(this.href);
-		 var targetHost = this.href.match(hostPattern);
+         var replacement = /.*[?&=#].*/.test($(this).attr("href")) ? encodeURIComponent($(this).attr("href")) : encodeURI($(this).attr("href"));
+		 var targetHost = $(this).attr("href").match(hostPattern);
 		 targetHost = targetHost!=null ? targetHost[1] : null ;
          //Rewrite off page references.
          if( targetHost != requestHost &&
