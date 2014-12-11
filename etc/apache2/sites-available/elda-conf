@@ -1,0 +1,75 @@
+<VirtualHost *:80>
+    # The ServerName directive sets the request scheme, hostname and port that
+    # the server uses to identify itself. This is used when creating
+    # redirection URLs. In the context of virtual hosts, the ServerName
+    # specifies what hostname must appear in the request's Host: header to
+    # match this virtual host. For the default virtual host (this file) this
+    # value is not decisive as it is used as a last resort host regardless.
+    # However, you must set it for any further virtual host explicitly.
+    #ServerName www.example.com
+
+    ServerAdmin webmaster@localhost
+    
+    # Document Root set give a subdirectory for elda assets
+    DocumentRoot /var/www/html/elda
+
+    # Set up some logging
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+  
+#    LogLevel debug rewrite:trace8 
+    LogLevel info
+
+# Enable symlinks and directory browsing
+    <Location />
+      Options MultiViews FollowSymLinks Indexes
+      #AllowOverride All
+      Order Allow,Deny
+      Allow from all
+      Deny from 222.95.38.44
+      IndexOptions +FancyIndexing +FoldersFirst
+    </Location>
+
+# Set up apache cache
+    # set up a disk cache
+    CacheIgnoreNoLastMod On
+    CacheRoot   /var/cache/apache2/mod_cache_disk
+    CacheMaxFileSize 50000000
+ 
+# Disable caching on lda-assets because they are in files anyway.   
+    CacheDisable /lda-assets
+
+# Enable caching of proxyed  requests to tomcat/elda (can be more selective)
+    CacheEnable disk /
+
+    CacheLock on
+    CacheLockPath /tmp/mod_cache-reference-lock
+    CacheLockMaxAge 60
+
+####################################################################################
+# When uncommented the line below prevent the specified paths being proxied by the
+# catch-all proxy through to tomcat. In order to have lda-assets served from Apache
+# rather than Tomcat uncomment the first of these and unpack the elda-assets.war 
+# at /var/www/html/elda/lda-assets
+#################################################################################### 
+#    ProxyPass /lda-assets    !
+#    ProxyPass /control       !
+#    ProxyPassMatch ^/$       !
+#    ProxyPass /index.html    !
+#    ProxyPass /robots.txt    !
+#    ProxyPass /server-status !
+#    ProxyPass /bwq           !
+
+###################################################################################
+# Proxy everthing else to Tomcat
+# Use AJP by preference
+# If using HTTP then include ProxyPreserveHost
+###################################################################################
+#    ProxyPass / http://localhost:8080/
+#    ProxyPreserveHost on
+    ProxyPass / ajp://localhost/
+
+#   Remove i-node dependency from default File ETagging
+    FileEtag Mtime Size
+        
+</VirtualHost>
