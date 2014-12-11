@@ -118,21 +118,21 @@
 							<groupId>com.epimorphics.lda</groupId>
 							<artifactId>elda-assets</artifactId>
 							<targetPath>lda-assets/</targetPath>
-							<excludes>
-								<exclude>index.html</exclude>
-								<exclude>specs/*</exclude>
-								<exclude>vocabulary/*</exclude>
-								<exclude>scripts/staging-education.js</exclude>
-								<exclude>scripts/staging.js.der</exclude>
-								<exclude>xslt/ashtml.xsl</exclude>
-								<exclude>xslt/org.xsl</exclude>
-								<exclude>xslt/org-csv.xsl</exclude>
-								<exclude>xslt/school.xsl</exclude>
-								<exclude>xslt/school-csv.xsl</exclude>
-								<exclude>xslt/transport.xsl</exclude>
-								<exclude>xslt/transport-csv.xsl</exclude>
-								<exclude>xslt/XmlRdfRenderer.xsl</exclude>
-							</excludes>
+<!-- 							<excludes> -->
+<!-- 								<exclude>index.html</exclude> -->
+<!-- 								<exclude>specs/*</exclude> -->
+<!-- 								<exclude>vocabulary/*</exclude> -->
+<!-- 								<exclude>scripts/staging-education.js</exclude> -->
+<!-- 								<exclude>scripts/staging.js.der</exclude> -->
+<!-- 								<exclude>xslt/ashtml.xsl</exclude> -->
+<!-- 								<exclude>xslt/org.xsl</exclude> -->
+<!-- 								<exclude>xslt/org-csv.xsl</exclude> -->
+<!-- 								<exclude>xslt/school.xsl</exclude> -->
+<!-- 								<exclude>xslt/school-csv.xsl</exclude> -->
+<!-- 								<exclude>xslt/transport.xsl</exclude> -->
+<!-- 								<exclude>xslt/transport-csv.xsl</exclude> -->
+<!-- 								<exclude>xslt/XmlRdfRenderer.xsl</exclude> -->
+<!-- 							</excludes> -->
 						</overlay>
 						<overlay>
 							<groupId>com.epimorphics.lda</groupId>
@@ -178,13 +178,13 @@
     	<dependency>
     		<groupId>com.epimorphics.lda</groupId>
     		<artifactId>elda-common</artifactId>
-    		<version>1.3.0</version>
+    		<version>1.3.1</version>
     		<type>war</type>
     	</dependency>
     	<dependency>
     		<groupId>com.epimorphics.lda</groupId>
     		<artifactId>elda-assets</artifactId>
-    		<version>1.3.0</version>
+    		<version>1.3.1</version>
     		<type>war</type>
     	</dependency>
 	</dependencies>

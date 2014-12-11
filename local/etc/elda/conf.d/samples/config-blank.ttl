@@ -35,9 +35,10 @@ spec:api   a       api:API;
         api:formatter       
 #                           spec:XmlFormatter,
                             spec:CsvFormatter,
-                            spec:HtmlFormatter;
+                            spec:XHtmlFormatter,
+                            spec:VHtmlFormatter;
         api:defaultFormatter
-                            spec:HtmlFormatter;
+                            spec:VHtmlFormatter;
         .
 
 ###############################################################################
@@ -125,9 +126,9 @@ geo:long    rdfs:range      xsd:decimal;
 ## FORMATTERS
 #
 ###############################################################################
-spec:HtmlFormatter
+spec:XHtmlFormatter
             a                       api:XsltFormatter ;
-            api:name                "html" ;
+            api:name                "xhtml" ;
             api:mimeType            "text/html;charset=UTF-8";
             elda:metadataOptions    "bindings,versions,execution,formats";
             api:stylesheet          "lda-assets/xslt/staging.xsl";
@@ -143,7 +144,14 @@ spec:CsvFormatter
             api:stylesheet          "lda-assets/xslt/csv.xsl";
 #           elda:shortnameMode      elda:preferLocal ;
             .
-            
+
+spec:VHtmlFormatter
+    a elda:VelocityFormatter
+    ; api:name "html"
+    ; elda:className "com.epimorphics.lda.renderers.VelocityRendererFactory"
+    ; api:mimeType "text/html;charset=UTF-8"
+    . 
+         
 #spec:XmlFormatter
 #           a                       api:XmlFormatter    ; 
 #           api:name                "xml"   ; 
@@ -157,8 +165,9 @@ spec:CsvFormatter
 #
 ###############################################################################
  spec:api  api:variable        [ api:name "_resourceRoot"; api:value "/lda-assets/" ];
-        api:variable           [ api:name "_strip_has"; api:value "yes" ];
-        .
+           api:variable        [ api:name "_strip_has"; api:value "yes" ];
+           api:variable        [ api:name "_velocityPath" ; api:value "/lda-assets/velocity" ] 
+           .
         
 ###############################################################################
 # SPARQL Query generated shortname mappings
