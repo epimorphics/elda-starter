@@ -1,0 +1,24 @@
+##########################################################################
+# This query returns a sample of one instance of each class in a dataset.
+#
+# It also includes a sample of the subjects and objects used with each property
+# (though not necessarily from the same statement).
+#
+# The bootstrapping queries can then be run against that sample.
+#
+# Inevit
+##########################################################################
+DESCRIBE ?sample ?subject ?object
+WHERE 
+{ 
+  { SELECT (sample(?thing) as ?sample)
+    WHERE {
+       ?thing a ?class.
+    } GROUP BY ?class
+  } UNION {
+    SELECT (sample(?s) as ?subject) ?p (sample(?o) as ?object) 
+    WHERE {
+      ?s ?p ?o
+    } GROUP BY ?p 
+  }
+}
