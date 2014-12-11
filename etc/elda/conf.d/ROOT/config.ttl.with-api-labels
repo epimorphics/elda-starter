@@ -32,6 +32,9 @@ spec:api   a       api:API;
 #        api:sparqlEndpoint  <http://localhost:2020/sparql>;
         api:maxPageSize     100;
         api:defaultPageSize 10;
+        elda:cacheExpiryTime "24h" ; # can be s (default), m, h, d, w
+        elda:enableCounting   true ;
+        elda:enableEtag       true ;
         api:formatter       
 #                           spec:XmlFormatter,
                             spec:CsvFormatter,
@@ -159,7 +162,8 @@ spec:CsvFormatter
  spec:api  api:variable        [ api:name "_resourceRoot"; api:value "/lda-assets/" ];
         api:variable           [ api:name "_strip_has"; api:value "yes" ];
         .
-        
+
+
 ###############################################################################
 # SPARQL Query generated shortname mappings
 ###############################################################################

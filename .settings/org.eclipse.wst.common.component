@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="bwqShell">
+    <wb-module deploy-name="elda-starter">
         <wb-resource deploy-path="/" source-path="/src/main/webapp"/>
         <property name="java-output-path"/>
         <property name="context-root" value="/"/>
