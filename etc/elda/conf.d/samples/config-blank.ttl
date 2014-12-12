@@ -38,6 +38,8 @@ spec:api   a       api:API;
                             spec:HtmlFormatter;
         api:defaultFormatter
                             spec:HtmlFormatter;
+        api:viewer          api:basicViewer, api:describeViewer, api:labelledDescribeViewer;
+        api:defaultViewer   api:describeViewer;
         .
 
 ###############################################################################
@@ -56,8 +58,6 @@ spec:anything
    FILTER (!isBlank(?item))
 """;
         ]; 
-        api:viewer          api:basicViewer, api:describeViewer, api:labelledDescribeViewer;
-        api:defaultViewer   api:describeViewer;
         .
 
 ###############################################################################
@@ -71,8 +71,6 @@ spec:about
         a                   api:ItemEndpoint;
         api:uriTemplate     "/about?resource={uri}";
         api:itemTemplate    "{uri}";
-        api:viewer          api:basicViewer, api:describeViewer, api:labelledDescribeViewer;
-        api:defaultViewer   api:describeViewer;
         .
         
 ##############################################################################
@@ -93,8 +91,6 @@ spec:mentions
         api:selector [
             api:where       "?item ?p ?uri . FILTER (!isBlank(?item))";
         ];
-        api:viewer          api:basicViewer, api:describeViewer, api:labelledDescribeViewer;
-        api:defaultViewer   api:describeViewer;
         .
 
 ###############################################################################
